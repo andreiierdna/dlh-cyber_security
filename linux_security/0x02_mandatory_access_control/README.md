@@ -1,1 +1,9 @@
 ## README.md
+- 0-analyse_mode.sh
+- 1-security_match.sh
+- 2-list_http.sh
+- 3-add_port.sh
+- 4-list_user.sh
+- 5-add_selinux.sh
+- 6-list_booleans.sh
+- 7-set_sendmail.sh
