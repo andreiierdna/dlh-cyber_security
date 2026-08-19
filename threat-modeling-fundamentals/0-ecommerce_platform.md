@@ -147,9 +147,9 @@ DREAD uses five factors, commonly rated from **1 (low)** to **10 (high)**.
 
 ### DREAD Calculation
 
-\[
-\text{DREAD Score} = \frac{9 + 9 + 8 + 9 + 10}{5} = \frac{45}{5} = 9.0
-\]
+(9 + 9 + 8 + 9 + 10) / 5  
+= 45 / 5  
+= **9.0**
 
 **Overall DREAD rating: 9.0 / 10 — Critical/High Risk**
 
@@ -193,4 +193,3 @@ With parameterization, PostgreSQL treats the search value as data rather than ex
 The checkout flow crosses several security-sensitive boundaries involving the user's browser, the application backend, the PostgreSQL database, and Stripe. Major checkout threats include request tampering, identity/session spoofing, and disclosure of sensitive information.
 
 SQL injection in public product search would be especially serious because the feature is unauthenticated, highly discoverable, and potentially exposes the central application database. Under the assumptions above, it receives a **DREAD score of 9.0/10** and should be treated as a high-priority vulnerability.
-

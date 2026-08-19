@@ -1,113 +1,140 @@
-# Healthcare Mobile App Security Analysis
+# Threat Analysis: Healthcare Mobile Application
 
-## 1. Most Critical Asset
-
-The **most critical asset is the patients’ Protected Health Information (PHI)**, including medical records, diagnoses, prescriptions, appointment information, and private communications with healthcare providers.
-
-Using the **CIA Triad**:
-
-- **Confidentiality:** PHI must only be accessible to authorized patients, healthcare providers, and staff. Unauthorized disclosure could expose highly sensitive medical information and create serious privacy and compliance consequences.
-- **Integrity:** Medical information must remain accurate and unaltered. If an attacker changes a diagnosis, prescription, medical record, or provider message, it could lead to incorrect treatment and patient harm.
-- **Availability:** Authorized users need reliable access to health information and services. Patients and clinicians may depend on the system for appointments, prescriptions, records, and communication. Extended outages could delay care.
-
-Because PHI requires strong protection across **confidentiality, integrity, and availability**, it is the system’s most critical asset.
+**Prepared for:** Executive Security Review
+**System:** Patient-facing mobile app (iOS/Android) with REST API backend, cloud-hosted database, and hospital system integration
+**Scope:** Medical records viewing, appointment scheduling, provider messaging, prescription refills
 
 ---
 
-## 2. STRIDE Analysis: “Message Healthcare Providers”
+## 1. Critical Asset Identification
 
-| STRIDE Category | Example Threat |
-|---|---|
-| **Spoofing** | An attacker steals a doctor’s or patient’s credentials and impersonates that person to send fraudulent messages. |
-| **Tampering** | An attacker intercepts or modifies a message, such as changing medical advice, dosage instructions, or symptoms reported by a patient. |
-| **Repudiation** | A patient or provider denies sending a message, and the system lacks sufficient logs or digital evidence to prove who performed the action. |
-| **Information Disclosure** | Sensitive messages containing PHI are exposed through weak authentication, insecure API endpoints, improper permissions, or unencrypted transmission/storage. |
-| **Denial of Service** | An attacker overwhelms the messaging API or backend so patients and providers cannot send or receive important communications. |
-| **Elevation of Privilege** | A normal user exploits an authorization flaw to access conversations belonging to other patients or gains provider-level permissions. |
+**Most critical asset: Patient Health Information (PHI) stored in the cloud database and transmitted via the API.**
 
-The most serious risks for this feature are **spoofing, tampering, information disclosure, and elevation of privilege**, because they can directly expose or corrupt sensitive clinical communications.
+Applying the CIA Triad:
 
----
+- **Confidentiality:** PHI is the most regulated data type under HIPAA. Exposure of diagnoses, medications, or mental health notes causes irreversible harm (discrimination, blackmail, identity theft) and triggers mandatory breach reporting.
+- **Integrity:** Corrupted prescription or allergy data can directly cause patient harm (e.g., a tampered dosage record leading to overdose). Integrity failures here are safety failures, not just data failures.
+- **Availability:** During emergencies, providers need immediate record access. Downtime during a clinical encounter can delay treatment decisions, though this is generally recoverable via downtime procedures, unlike confidentiality or integrity loss.
 
-## 3. Prioritized Security Controls
-
-### 1. Strong Authentication and Multi-Factor Authentication
-
-Require secure authentication for patients, providers, and administrators, with **multi-factor authentication (MFA)** especially for healthcare staff and privileged accounts.
-
-**Why it is first:** Stolen or weak credentials could give an attacker direct access to medical records, prescriptions, and private messages. Strong authentication reduces the risk of account takeover and impersonation.
-
-### 2. Encryption in Transit and at Rest
-
-Use modern TLS for communications between:
-
-- Mobile clients and the REST API
-- Backend services and databases
-- The application and hospital systems
-
-Encrypt PHI stored in databases, backups, and other persistent storage.
-
-**Why it is second:** Even if network traffic or stored data is intercepted or exposed, strong encryption makes sensitive patient information significantly harder to read or misuse.
-
-### 3. Strong Authorization and Least-Privilege Access Control
-
-Implement **role-based or attribute-based access control** so users can access only the information required for their role.
-
-Examples:
-
-- Patients can access only their own records and messages.
-- Providers can access only patients for whom they have authorized clinical access.
-- Administrative accounts receive only the permissions required for their duties.
-
-Authorization must be enforced by the backend API rather than relying on the mobile application.
-
-**Why it is third:** Authentication proves who a user is, but authorization determines what that user is allowed to access. This control is essential for preventing one authenticated user from viewing another patient’s PHI.
-
-### 4. Comprehensive Audit Logging and Monitoring
-
-Record security-relevant events such as:
-
-- Successful and failed login attempts
-- Medical-record access
-- Messages sent, viewed, or deleted
-- Prescription-related actions
-- Permission changes
-- Administrative activity
-- Suspicious API requests
-
-Protect logs from unauthorized modification and monitor them for abnormal activity.
-
-**Why it is fourth:** Audit logs support accountability, incident investigation, repudiation protection, and detection of unauthorized access to PHI.
-
-### 5. Secure API and Application Controls
-
-Protect the REST API and mobile application through controls such as:
-
-- Strict input validation
-- Secure session and token management
-- Rate limiting
-- Protection against common API authorization flaws
-- Dependency and vulnerability scanning
-- Secure error handling
-- Regular penetration testing and security testing
-
-**Why it is fifth:** The REST API is the main gateway to sensitive backend functions and data. Application-layer weaknesses could allow attackers to bypass otherwise strong security controls.
+**Conclusion:** Confidentiality and integrity carry higher weighted risk than availability because their failure modes are irreversible or life-threatening, whereas availability failures are typically mitigated by fallback clinical workflows (paper charts, phone calls).
 
 ---
 
-## Conclusion
+## 2. STRIDE Analysis — "Message Healthcare Providers" Feature
 
-The healthcare application’s **patient PHI is its most critical asset** because loss of confidentiality, integrity, or availability can have privacy, compliance, and patient-safety consequences.
+| STRIDE Category | Threat | Attack Scenario |
+|---|---|---|
+| **Spoofing** | Attacker impersonates a provider | An attacker compromises a provider's session token via a phishing link and sends messages to patients pretending to be their doctor, instructing them to stop a medication. |
+| **Tampering** | Message content altered in transit or at rest | A man-in-the-middle attacker on public Wi-Fi intercepts an unencrypted API call and modifies a prescription refill request before it reaches the pharmacy system. |
+| **Repudiation** | Provider denies sending a harmful instruction | A provider sends an incorrect dosage instruction, then later denies sending it because the system lacks message signing or immutable audit logs. |
+| **Information Disclosure** | Message contents leaked to unauthorized parties | An Insecure Direct Object Reference (IDOR) in the messaging API (`/messages/{id}`) allows a patient to increment the ID and read other patients' conversations with providers. |
+| **Denial of Service** | Messaging feature flooded to block critical communication | An attacker scripts thousands of message-send requests, exhausting API rate limits and preventing a patient from reaching a provider during a medical emergency. |
+| **Elevation of Privilege** | Patient account gains provider-level messaging rights | A broken access control flaw lets a patient account call the provider-only "broadcast" endpoint, sending unauthorized mass messages to other patients. |
 
-For the healthcare-provider messaging feature, STRIDE identifies threats including impersonation, message modification, denial of actions, data leakage, service disruption, and privilege escalation.
+### Detailed Threat: Spoofing a Healthcare Provider
 
-The highest-priority protections are:
+- **Description:** An attacker gains control of a provider's authentication token (via phishing, session hijacking, or credential stuffing) and uses it to send messages that appear to originate from a trusted clinician.
+- **Attack Scenario:** Attacker sends a phishing email mimicking the hospital's SSO login page. A provider enters credentials; the attacker captures the session cookie and replays it against the messaging API to send a fraudulent message to a patient claiming a lab result is normal when it is not.
+- **Impact:** High — patient safety harm, loss of trust, potential litigation, regulatory penalties under HIPAA.
+- **Likelihood:** Medium — phishing is common, but requires bypassing MFA if enabled.
+- **Mitigation:** Enforce hardware-backed MFA (FIDO2/WebAuthn) for all provider accounts, bind sessions to device fingerprints, and implement short-lived tokens (15-minute expiry) with re-authentication for sensitive actions.
 
-1. **Strong authentication and MFA**
-2. **Encryption in transit and at rest**
-3. **Least-privilege authorization**
-4. **Audit logging and monitoring**
-5. **Secure API and application controls**
+### DREAD Score — Provider Spoofing
 
-Together, these controls provide layered protection for sensitive patient information and the healthcare services that depend on it.
+**Formula:** `DREAD = (Damage + Reproducibility + Exploitability + Affected Users + Discoverability) / 5`, each scored 1–10.
 
+| Factor | Score | Reasoning |
+|---|---|---|
+| Damage | 9 | Patient safety directly impacted; false medical guidance |
+| Reproducibility | 6 | Requires successful phishing, not guaranteed every attempt |
+| Exploitability | 5 | Needs social engineering skill, not purely technical |
+| Affected Users | 4 | Typically one patient per compromised provider account |
+| Discoverability | 6 | Phishing kits targeting healthcare SSO are publicly available |
+
+**DREAD Total = (9 + 6 + 5 + 4 + 6) / 5 = 6.0 → High Risk**
+
+### DREAD Score — Message IDOR (Information Disclosure)
+
+| Factor | Score | Reasoning |
+|---|---|---|
+| Damage | 8 | Exposes PHI across multiple patients, HIPAA breach |
+| Reproducibility | 9 | Trivial to reproduce once discovered (sequential IDs) |
+| Exploitability | 8 | Requires only basic API tooling (Postman/Burp) |
+| Affected Users | 9 | Potentially every patient in the database |
+| Discoverability | 7 | Sequential IDs are commonly probed by testers/attackers |
+
+**DREAD Total = (8 + 9 + 8 + 9 + 7) / 5 = 8.2 → Critical Risk**
+
+### Detailed Threat: Message Tampering in Transit
+
+- **Description:** An attacker positioned between the mobile client and the API (e.g., on unsecured public Wi-Fi or via a malicious proxy) intercepts and modifies message or prescription-request payloads before they reach the backend.
+- **Attack Scenario:** A patient uses a coffee shop Wi-Fi network with an attacker-controlled rogue access point. The app's TLS certificate pinning is missing, so the attacker performs a TLS downgrade and edits a prescription refill request to change the medication dosage field before forwarding it.
+- **Impact:** High — incorrect medication dispensing poses direct patient safety risk and creates significant liability exposure for the hospital.
+- **Likelihood:** Low-Medium — requires active network positioning and a missing certificate-pinning control, which is a specific implementation gap.
+- **Mitigation:** Implement certificate pinning in the mobile client, enforce TLS 1.2+ with strict cipher suites, and add server-side integrity checks (HMAC signatures) on prescription-related payloads so tampered requests are rejected before processing.
+
+### DREAD Score — Message Tampering
+
+| Factor | Score | Reasoning |
+|---|---|---|
+| Damage | 8 | Incorrect dosage instructions risk direct patient harm |
+| Reproducibility | 4 | Requires active MITM positioning, not always available |
+| Exploitability | 5 | Needs specialized tooling (rogue AP, TLS-strip proxy) |
+| Affected Users | 3 | Limited to patients on the specific compromised network |
+| Discoverability | 4 | Missing cert pinning is not obvious without app analysis |
+
+**DREAD Total = (8 + 4 + 5 + 3 + 4) / 5 = 4.8 → Medium Risk**
+
+---
+
+## 3. Prioritized Security Controls for Patient Data Protection
+
+Given typical constraints (limited security budget, small engineering team, 6–12 month roadmap), controls are prioritized by risk reduction per dollar and implementation complexity:
+
+1. **Strong Authentication & MFA (Priority 1)**
+   Enforce MFA for all provider and admin accounts, and risk-based step-up authentication for patients accessing sensitive records. This directly closes the highest-DREAD threat (spoofing) at relatively low cost using existing identity providers (Okta, Azure AD B2C).
+
+2. **End-to-End Encryption of PHI in Transit and at Rest (Priority 2)**
+   TLS 1.2+ for all API traffic and AES-256 encryption for the database, with field-level encryption for highly sensitive fields (diagnoses, mental health notes). Mitigates tampering and disclosure with mature, well-documented libraries — low engineering overhead relative to risk reduction.
+
+3. **Object-Level Access Control (Authorization Hardening) (Priority 3)**
+   Fix IDOR-class vulnerabilities by enforcing server-side ownership checks on every record and message ID, not relying on client-supplied identifiers. Addresses the Critical (8.2) DREAD score found above; this is a code-level fix, not a purchased product, making it high-impact and low-cost.
+
+4. **Immutable Audit Logging (Priority 4)**
+   Log all access to PHI and all provider messages in a write-once, tamper-evident store (e.g., append-only log with cryptographic hash chaining). Resolves repudiation threats and satisfies HIPAA's audit control requirement (45 CFR §164.312(b)). Moderate cost due to storage and log-review tooling.
+
+5. **API Rate Limiting and Anomaly Detection (Priority 5)**
+   Apply per-user and per-IP rate limits on the messaging and records APIs, paired with basic anomaly alerts (e.g., sudden spike in record access). Mitigates DoS and mass-scraping scenarios. Lower priority than the above because its failure mode (temporary unavailability) is less severe than confidentiality or integrity loss.
+
+**Rationale for ordering:** Controls 1–3 address vulnerabilities with the highest DREAD scores (spoofing and IDOR) and are foundational — later controls are less effective if authentication and authorization are broken. Controls 4–5 add defense-in-depth and regulatory compliance but address lower-likelihood or lower-impact scenarios, making them appropriate for a phase-two rollout once budget allows.
+
+---
+
+## Glossary
+
+- **PHI:** Protected Health Information, as defined under HIPAA.
+- **IDOR:** Insecure Direct Object Reference, a broken access control vulnerability.
+- **DREAD:** A risk-scoring model (Damage, Reproducibility, Exploitability, Affected Users, Discoverability).
+- **STRIDE:** A threat classification model (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege).
+- **CIA Triad:** Confidentiality, Integrity, and Availability — the three core properties of information security.
+
+## Real-World Constraints Considered
+
+- **Budget:** Prioritization favors code-level fixes (authorization, rate limiting) over expensive third-party security products, deferring costlier controls like dedicated SIEM tooling to a later phase.
+- **Team size:** A small engineering team cannot implement all controls simultaneously; the ordering above assumes a phased rollout over two to three sprints per control.
+- **Regulatory deadlines:** HIPAA audit control requirements make immutable logging non-negotiable within the fiscal year, even though it is ranked fourth by pure risk reduction.
+- **User experience:** MFA and step-up authentication are scoped to sensitive actions only, to avoid excessive friction that could reduce patient app adoption.
+
+## Risk Register Summary
+
+| Threat | STRIDE Category | DREAD Score | Risk Level |
+|---|---|---|---|
+| Provider Identity Spoofing | Spoofing | 6.0 | High |
+| Message/Prescription Tampering | Tampering | 4.8 | Medium |
+| Messaging IDOR Disclosure | Information Disclosure | 8.2 | Critical |
+
+## Summary
+
+The highest-risk exposure in this system is unauthorized access to PHI via broken authorization (DREAD 8.2) and provider identity spoofing (DREAD 6.0). Remediation should begin immediately with authorization fixes (low cost, high impact) in parallel with an MFA rollout, followed by encryption hardening and audit logging within the current fiscal quarter to meet HIPAA compliance deadlines.
+
+Overall, the system's risk profile is driven primarily by authorization and authentication weaknesses rather than exotic attack techniques, meaning the highest-value investment for stakeholders is disciplined engineering hygiene rather than new security tooling purchases.
