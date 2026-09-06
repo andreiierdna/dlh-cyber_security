@@ -2,23 +2,24 @@
 
 ## Opening Statement
 
-MedDefense has security controls, but they are uneven and insufficient for an organization whose systems directly support patient care. A serious cyberattack could move from one compromised device into clinical systems and recovery infrastructure before MedDefense detects it.
+MedDefense is not adequately protected against a serious cyberattack. A successful attack could interrupt patient care, expose sensitive records, and prevent the organization from restoring critical services quickly.
 
 ## Critical Finding
 
-The most dangerous gap is MedDefense’s broadly connected internal network combined with weak centralized monitoring. If one workstation is compromised, an attacker could reach the electronic health record, imaging systems, systems that control user access, backups, or bedside devices, potentially disrupting care, exposing protected patient information, and disabling recovery; MedDefense previously allowed unauthorized cryptocurrency-mining malware to operate for at least two weeks before detection.
+The biggest weakness is that too many systems can communicate with one another, while suspicious activity may go unnoticed. If one employee device is taken over, an attacker could reach patient records, imaging, backups, or bedside equipment, turning a single incident into a hospital-wide disruption.
 
 ## Three Priority Actions
 
-**1. Find and fix known software weaknesses — $18,000; begin immediately, with mature operation taking more than one month.** This reduces the chance of initial compromise by ensuring known weaknesses are identified, prioritized, corrected, and verified.
+**1. Find and fix known software weaknesses — $18,000; start immediately, with full operation taking more than one month.** This lowers the chance of attackers using problems that software providers have already fixed.
 
-**2. Separate and monitor medical devices — $30,000; more than one month.** Separating approximately 80 patient monitors and 120 infusion pumps from ordinary systems limits an attacker’s ability to reach technology that directly supports treatment.
-**3. Create an isolated recovery copy — $25,000; within one month.** A separately protected backup reduces the chance that ransomware or a physical event disables both operating systems and the means to restore them.
+**2. Separate medical devices from ordinary business systems — $30,000; more than one month.** This limits how far an attacker can move and helps protect approximately 80 patient monitors and 120 infusion pumps.
+
+**3. Create a separately protected backup — $25,000; within one month.** This gives MedDefense a recovery option if an attack or physical event damages both live systems and normal backups.
 
 ## The Business Case
 
-The recommended first-year program invests $118,000 of the $120,000 budget across seven priority treatments, leaving a $2,000 contingency. That investment is justified by demonstrated exposure: MedDefense has already experienced a nine-hour electronic health record outage and a compromise that remained undetected for two weeks.
+The proposed first-year program uses $118,000 of the $120,000 budget and leaves $2,000 for unexpected needs. This is an investment in keeping the hospital operating: MedDefense has already experienced a nine-hour patient-record outage and an attack that remained undetected for at least two weeks.
 
 ## Closing
 
-If the Board takes no action, MedDefense accepts a materially elevated risk of prolonged clinical disruption, patient-data exposure, patient-safety impact, and impaired recovery.
+If the Board takes no action, MedDefense accepts a continuing risk of disrupted care, exposed patient information, and prolonged recovery after a major attack.
