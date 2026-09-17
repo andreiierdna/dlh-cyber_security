@@ -1,189 +1,101 @@
 # Task 14 — The Network Posture
 
-MedDefense's flat network amplifies vulnerability risk because compromise of one host is not naturally contained within a security zone.
+MedDefense's flat network amplifies vulnerability risk because compromise of one host is not naturally contained within a security zone. 
+
+The **Risk Amplification Factor** used below is a contextual estimate of how much the flat architecture increases the practical risk of each CVE by expanding both pre-exploitation reachability and post-exploitation blast radius. It is **not a CVSS multiplier**.
 
 ---
 
 ## 1. CVE-2021-44790 — Apache mod_lua Buffer Overflow
 
-**CVE:** CVE-2021-44790
-**Host:** `billing-srv-01 — 10.10.2.15`
-**CVSS Base Score:** **9.8 Critical**, as reported by the scan.
+CVE: CVE-2021-44790
 
-The scan confirms that `billing-srv-01` runs the MedDefense billing application and that the vulnerable Apache `mod_lua` module is loaded. A crafted HTTP request may result in remote code execution without authentication.
+Host: billing-srv-01 — 10.10.2.15
 
-### Scenario A: Current Flat Network
+CVSS Base Score: 9.8
 
-**Who can reach this vulnerability:**
-Potentially any compromised system capable of communicating across the MedDefense `10.10.0.0/16` routed environment.
+### Scenario A: Current (flat network)
 
-This includes systems from the workstation range `10.10.1.0/24`, server systems in `10.10.2.0/24`, medical devices in `10.10.3.0/24`, and connected systems at other MedDefense locations where routing permits access. Because these ranges are not separated by meaningful internal firewall policy, an attacker does not first need to cross a segmentation boundary to reach the billing server.
+Who can reach this vulnerability: Systems throughout the MedDefense `10.10.0.0/16` environment can potentially communicate with `billing-srv-01`. This includes workstations in `10.10.1.0/24`, servers in `10.10.2.0/24`, medical devices in `10.10.3.0/24`, and other routed MedDefense systems. There is no meaningful internal segmentation preventing a compromised workstation or other internal host from attempting to reach the vulnerable Apache service.
 
-An ordinary compromised workstation could therefore become the attack origin against `billing-srv-01`.
+What the attacker can reach AFTER exploitation: Successful exploitation can provide code execution on `billing-srv-01`. Finding 002 provides an additional privilege-escalation path from an Apache worker context to root. From the compromised billing server, the attacker has network proximity to the EHR database, Active Directory, backup infrastructure, workstations, and medical-device networks. The attacker would still need credentials or additional vulnerabilities to compromise those systems, but the flat network does not provide a firewall boundary to contain the attacker.
 
-**What the attacker can reach AFTER exploitation:**
-Successful exploitation gives the attacker code execution on the billing server. Finding 002 provides an additional local privilege-escalation path from an Apache worker context to root, meaning Findings 001 and 002 can form a complete compromise chain.
+Effective Risk: Critical. A 9.8 remote-code-execution vulnerability on a previously compromised billing server can become an enterprise lateral-movement foothold rather than remaining a billing-only incident.
 
-From the compromised billing server, the flat network provides network-layer reachability toward systems such as:
+### Scenario B: Hypothetical (segmented network)
 
-* `ehr-db-01 — 10.10.2.11`, containing EHR PHI;
-* `ad-dc-01 — 10.10.2.20`, the Domain Controller;
-* `NAS-01 — 10.10.2.41`, the backup repository;
-* workstations on `10.10.1.0/24`;
-* medical devices on `10.10.3.0/24`.
+Who can reach this vulnerability: Only authorized systems in the billing VLAN, such as billing workstations and required application services, would be permitted to communicate with the vulnerable Apache service.
 
-This does not mean that exploitation automatically grants credentials or application authorization on all those systems. It means that segmentation does not provide an additional network barrier to prevent the attacker from scanning, attacking, or attempting credential reuse against them.
+What the attacker can reach AFTER exploitation: After compromising `billing-srv-01`, the attacker would initially remain inside the billing VLAN. Access to the EHR, Domain Controllers, backup systems, and medical devices would require crossing a firewall through an explicitly permitted rule or discovering another pivot path.
 
-**Effective Risk:** **Critical.**
+Effective Risk: High. The Apache vulnerability would still require urgent remediation, but the compromise would be much more likely to remain confined to billing infrastructure.
 
-The original vulnerability is already a 9.8 remote-code-execution weakness. The flat network increases its importance because compromise is not naturally contained to billing. The affected host can become an enterprise lateral-movement platform.
+Risk Amplification Factor: 8.3x
 
-### Scenario B: Hypothetical Segmented Network
-
-**Who can reach this vulnerability:**
-Only systems explicitly permitted to access the billing VLAN. A properly designed architecture might allow billing workstations and required application services while blocking ordinary clinical workstations, medical devices, EHR systems, and unrelated servers.
-
-**What the attacker can reach AFTER exploitation:**
-Compromise would initially be confined to the billing VLAN.
-
-An attacker would need to find an allowed firewall rule, compromise a dual-homed system, obtain privileged credentials, or exploit another authorized communication path before reaching the EHR, Domain Controllers, backups, or medical-device networks.
-
-The Apache vulnerability would still need urgent patching, but one compromised billing server would no longer automatically have unrestricted network proximity to the rest of MedDefense.
-
-**Effective Risk:** **High to Critical locally, substantially reduced enterprise-wide.**
-
-The vulnerability itself remains severe because segmentation does not eliminate CVE-2021-44790. The difference is that the likely **blast radius** changes from organization-wide to primarily the billing security zone.
-
-### Risk Amplification Factor
-
-**Very High — up to 256× expansion in theoretical network address-space reachability when comparing a `/24` security zone with the current `/16`.**
-
-The more meaningful practical amplification is that a compromise that should affect **one business function—billing—can instead become a stepping stone toward EHR, identity infrastructure, backups, and clinical systems.**
+The flat network increases the practical risk by approximately **8.3x** because it changes the likely blast radius from one business segment to multiple Critical environments, including EHR, Active Directory, backups, and clinical systems.
 
 ---
 
-## 2. CVE-2019-0708 — BlueKeep on the MRI Workstation
+## 2. CVE-2019-0708 — BlueKeep
 
-**CVE:** CVE-2019-0708 — BlueKeep
-**Host:** `WS-RAD-01 — 10.10.1.70`
-**CVSS Base Score:** **9.8 Critical**, as reported by the scan.
+CVE: CVE-2019-0708
 
-`WS-RAD-01` is the Windows XP MRI control workstation. The scan confirms that TCP/3389 is open and that BlueKeep is present and weaponized. The host also exposes other legacy vulnerabilities, including EternalBlue and MS08-067.
+Host: WS-RAD-01 — 10.10.1.70
 
-### Scenario A: Current Flat Network
+CVSS Base Score: 9.8
 
-**Who can reach this vulnerability:**
-Potentially hosts throughout the `10.10.0.0/16` internal network.
+### Scenario A: Current (flat network)
 
-The scan specifically notes that the MRI workstation is located on the same `10.10.1.0/24` network as ordinary workstations and that there is **no VLAN isolation**.
+Who can reach this vulnerability: Systems throughout the internal `10.10.0.0/16` environment can potentially reach the MRI workstation. The scan specifically confirms that `WS-RAD-01` is located on `10.10.1.0/24` with ordinary workstations and has no VLAN isolation. Any compromised internal endpoint capable of reaching TCP/3389 can therefore attempt to exploit BlueKeep.
 
-This means that compromise of an administrative workstation, nurse workstation, unmanaged endpoint, or another internal host could provide the attacker with network access to the MRI workstation's exposed RDP service.
+What the attacker can reach AFTER exploitation: Compromise of the MRI workstation does not remain isolated to Radiology. The attacker can use the workstation as a foothold to scan or attack PACS, EHR systems, Active Directory, backup infrastructure, user workstations, and other medical devices. Because the workstation is part of the MRI workflow, compromise could also directly affect diagnostic imaging availability.
 
-**What the attacker can reach AFTER exploitation:**
-After gaining control of the MRI workstation, the attacker is not confined to an isolated medical-device segment.
+Effective Risk: Critical. BlueKeep is already a remotely exploitable vulnerability on an unsupported clinical system, and the flat network gives the compromised device enterprise-wide lateral-movement value.
 
-The compromised clinical workstation can potentially communicate with:
+### Scenario B: Hypothetical (segmented network)
 
-* PACS and radiology systems;
-* EHR servers and databases;
-* Active Directory;
-* other workstations;
-* backup infrastructure;
-* other medical devices.
+Who can reach this vulnerability: Only systems within a dedicated Radiology or medical-device VLAN, together with specifically authorized administrative systems, would be able to reach the MRI workstation. Unrelated workstations and servers would be blocked from accessing RDP and SMB.
 
-The MRI system is especially significant because it participates in clinical imaging workflows and exchanges information with PACS. Instead of the attack terminating at one legacy medical device, the compromised workstation can become another lateral-movement foothold inside the same broadly reachable enterprise network.
+What the attacker can reach AFTER exploitation: Successful exploitation would primarily affect the MRI security zone. Required communication with PACS could remain permitted, but communication toward billing, general workstations, backup infrastructure, and unrelated medical devices would be denied by default.
 
-**Effective Risk:** **Critical / Extreme clinical risk.**
+Effective Risk: High. BlueKeep would still threaten MRI availability, but compromise would be much less likely to become an organization-wide lateral-movement event.
 
-The vulnerability already allows remote compromise of an unsupported Windows system. The flat architecture adds the possibility that compromise of the MRI workstation becomes either a route **into** clinical systems or a stepping stone **out of** the radiology environment toward enterprise infrastructure.
+Risk Amplification Factor: 10.0x
 
-### Scenario B: Hypothetical Segmented Network
-
-**Who can reach this vulnerability:**
-Only systems inside a dedicated radiology or medical-device VLAN, plus explicitly authorized management systems.
-
-For example, firewall rules could allow required DICOM traffic between the MRI and PACS while denying RDP, SMB, and other unnecessary communication from ordinary employee workstations.
-
-**What the attacker can reach AFTER exploitation:**
-Successful BlueKeep exploitation would primarily compromise the MRI security zone.
-
-The attacker might still affect the MRI workstation and potentially permitted radiology services, but reaching Active Directory, the billing environment, backup infrastructure, or unrelated medical-device networks would require crossing controlled firewall boundaries.
-
-This is particularly valuable for a legacy medical system that cannot easily be upgraded because of vendor certification constraints.
-
-**Effective Risk:** **High/Critical to the MRI service, but substantially reduced enterprise risk.**
-
-The workstation itself remains vulnerable, and patient-care availability still matters. Segmentation does not make BlueKeep harmless. It transforms the problem from an **enterprise lateral-movement opportunity** into a much more contained **legacy-device risk**.
-
-### Risk Amplification Factor
-
-**Extreme — up to 256× theoretical address-space reachability expansion, plus cross-domain clinical impact.**
-
-The more important amplification is architectural: an unsupported MRI workstation that should be treated as an isolated legacy device instead has direct network proximity to unrelated workstations, servers, authentication infrastructure, and other medical systems.
-
-For assets that cannot be patched or upgraded easily, segmentation is particularly powerful because it can reduce exposure without modifying the certified medical device itself.
+The flat network increases the practical risk by approximately **10.0x** because an unsupported medical device that should be tightly isolated instead has network proximity to unrelated enterprise and clinical systems. Segmentation is especially important here because the Windows XP operating system cannot easily be replaced without affecting medical-device certification.
 
 ---
 
 ## 3. CVE-2021-34527 — PrintNightmare
 
-**CVE:** CVE-2021-34527 — PrintNightmare
-**Host:** `print-srv-01 — 10.10.2.31`
-**CVSS Base Score:** **8.8 High**, as reported by the scan.
+CVE: CVE-2021-34527
 
-The print server runs Windows Server 2012 R2, which has reached end of support. The scan specifically identifies CVE-2021-34527, notes that public weaponized proof-of-concept code exists, and confirms that the Print Spooler service is running.
+Host: print-srv-01 — 10.10.2.31
 
-### Scenario A: Current Flat Network
+CVSS Base Score: 8.8
 
-**Who can reach this vulnerability:**
-Potentially systems throughout MedDefense's internal `10.10.0.0/16`, subject only to host-level service configuration rather than meaningful network segmentation.
+### Scenario A: Current (flat network)
 
-Because enterprise print servers are normally accessed by many workstations, the server naturally has relationships with a large number of endpoints. In a flat architecture, those relationships exist without strong security-zone boundaries separating printing infrastructure from Critical servers and clinical systems.
+Who can reach this vulnerability: Workstations and systems throughout MedDefense's internal network can potentially communicate with the print server. Because printing is a shared enterprise service and the environment lacks effective segmentation, the server has broad network exposure to user endpoints.
 
-**What the attacker can reach AFTER exploitation:**
-A successfully compromised print server becomes a Windows foothold inside the Central server environment.
+What the attacker can reach AFTER exploitation: After compromising `print-srv-01`, an attacker obtains a Windows server foothold in the Central server environment. From that position, the attacker can attempt to enumerate and attack Active Directory, EHR systems, file servers, billing infrastructure, backup systems, and user endpoints. Credentials recovered from the print server could further assist lateral movement.
 
-From `10.10.2.31`, an attacker has network proximity to:
+Effective Risk: Critical. Although the CVSS score is 8.8, the print server's central position and broad internal connectivity make exploitation valuable for lateral movement toward higher-value systems.
 
-* `ad-dc-01` and `ad-dc-02`;
-* EHR infrastructure;
-* file services;
-* billing infrastructure;
-* backup systems;
-* workstations throughout the organization.
+### Scenario B: Hypothetical (segmented network)
 
-The attacker could enumerate services, harvest credentials available on the compromised server, attempt credential reuse, attack Active Directory, or search for other vulnerable hosts.
+Who can reach this vulnerability: Only authorized workstation VLANs and print-management systems would be allowed to communicate with the print server. Critical application servers and medical-device VLANs would have no reason to initiate unrestricted connections to it.
 
-Again, flat-network reachability does not automatically provide authorization. It removes a containment layer that would otherwise force the attacker through controlled inter-VLAN firewall policies.
+What the attacker can reach AFTER exploitation: Compromise would initially remain limited to the printing security zone and the specific communications permitted through its firewall rules. Direct access from the print server to EHR databases, medical devices, and backup management systems could be blocked.
 
-**Effective Risk:** **High to Critical.**
+Effective Risk: High. PrintNightmare would remain a serious vulnerability, but a compromised print server would be significantly less useful as an enterprise pivot point.
 
-PrintNightmare is already a serious exploitable Windows vulnerability. The flat architecture makes a compromised print server valuable as an internal pivot because there is little network-level resistance between it and more important assets.
+Risk Amplification Factor: 6.5x
 
-### Scenario B: Hypothetical Segmented Network
-
-**Who can reach this vulnerability:**
-Only workstations and print-management systems explicitly allowed to communicate with the printing VLAN.
-
-Critical servers such as EHR databases, backup systems, medical devices, and Domain Controllers would not need unrestricted bidirectional communication with the print server.
-
-**What the attacker can reach AFTER exploitation:**
-An attacker could compromise printing infrastructure and perhaps attack systems inside the same permitted zone.
-
-Moving from the print environment to Critical server or medical-device VLANs would require an explicitly permitted firewall path or another pivot technique.
-
-Even if patching were delayed temporarily, segmentation would provide a compensating control that limits how useful the compromised print server is for lateral movement.
-
-**Effective Risk:** **Medium to High enterprise risk, while remaining High locally until remediated.**
-
-### Risk Amplification Factor
-
-**Very High — potentially up to 256× greater address-space scope than a single `/24`, with a much larger set of lateral-movement targets.**
-
-The practical amplification comes from converting what should be a compromised **support service** into a potential pivot toward Active Directory, EHR, backups, and other infrastructure.
+The flat network increases the practical risk by approximately **6.5x** because it turns compromise of a supporting infrastructure server into a possible lateral-movement path toward Critical authentication, clinical, and recovery systems.
 
 ---
 
-# Network Posture Summary
+## Network Posture Summary
 
-The flat MedDefense network acts as a **risk amplifier across almost every vulnerability in the 31-finding scan**. It does not increase a CVE's technical CVSS base score—the vulnerable code is the same—but it dramatically increases **exposure, lateral-movement opportunity, and blast radius**. A vulnerability that should compromise only one security zone can instead provide network proximity to the entire `10.10.0.0/16` environment, including workstations, EHR systems, Active Directory, billing infrastructure, backups, and medical devices. Compared with a hypothetical `/24` security zone, the unrestricted `/16` represents up to **256 times more address space**, although the actual number of live hosts is much smaller—the scan identified 47 responsive systems. Segmentation is therefore arguably more strategically impactful than patching any **single** CVE because a patch removes one attack path, whereas segmentation constrains **many current and future attack paths simultaneously**. If CVE-2021-44790 is patched today, another vulnerable service may appear tomorrow; a properly segmented network still limits that future compromise. Segmentation is not a substitute for patching, but it provides a persistent containment layer that prevents individual vulnerabilities from automatically becoming enterprise-wide incidents.
+The flat MedDefense network creates an aggregate risk multiplier across the entire vulnerability scan because almost every successful compromise can become a starting point for lateral movement. Vulnerabilities that should be confined to billing, Radiology, printing, or another individual security zone instead provide attackers with network proximity to the broader `10.10.0.0/16` environment. Across the three examples above, the estimated Risk Amplification Factors range from **6.5x to 10.0x**, depending on the affected system's role, reachability, and value as a pivot point. Segmentation is arguably more impactful than patching any single CVE because a patch removes one known attack path, while segmentation limits the blast radius of **all current and future vulnerabilities**. Patching CVE-2021-44790 protects one Apache service; properly separating billing, EHR, Active Directory, backups, workstations, and medical devices reduces the ability of an attacker to turn any successful exploit into an enterprise-wide incident. Patching and segmentation are both necessary, but segmentation provides a persistent containment control even when an unknown or unpatched vulnerability is successfully exploited.
