@@ -10,7 +10,7 @@ MedDefense's governance problem is not an absence of technical personnel. It is 
 **C = Consulted:** provides required expertise or business input.  
 **I = Informed:** receives status or decisions.
 
-| Security Activity | CEO | Deputy CISO — James Chen | IT Director — Sarah Park | Department Heads | Security Analyst |
+| Security Activity | CEO | Deputy CISO — James Chen | IT Director — Sarah Park | Dept Heads | Security Analyst |
 |---|---|---|---|---|---|
 | **Security budget approval** | **A** | **R** | C | C | C |
 | **Vulnerability remediation** | I | **A** | **R** | C | **R** |
