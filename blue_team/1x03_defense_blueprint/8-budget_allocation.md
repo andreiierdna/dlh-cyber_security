@@ -5,7 +5,7 @@
 
 MedDefense has a fixed annual security budget of:
 
-**Budget = $120,000**
+**Budget = 120000**
 
 The Task 7 controls are evaluated using:
 
