@@ -117,7 +117,7 @@ Therefore:
 
 ---
 
-## Selection Risk-Reduction Score
+## Selection risk reduction Score
 
 Using the individual Task 7 ALE reductions:
 
@@ -243,7 +243,7 @@ Remaining budget:
 
 **$120,000 − $100,000 = $20,000**
 
-## Alternative Task 7 Risk-Reduction Score
+## Alternative Task 7 risk reduction Score
 
 **$1,718,640 + $1,432,200 + $1,002,540 + $859,320 + $74,600**
 
