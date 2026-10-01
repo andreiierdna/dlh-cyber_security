@@ -2,7 +2,7 @@
 
 ## Goal
 
-Generate RSA and ECC key pairs, experimentally demonstrate the size limitation of asymmetric encryption, compare RSA and ECC key sizes, and explain why modern cryptographic systems use a hybrid combination of asymmetric and symmetric cryptography.
+Generate RSA and ECC key pairs, experimentally demonstrate the size limitation of asymmetric encryption, compare RSA and ECC key sizes, and explain why modern cryptographic systems combine asymmetric and symmetric cryptography.
 
 ---
 
@@ -10,14 +10,19 @@ Generate RSA and ECC key pairs, experimentally demonstrate the size limitation o
 
 ## Generate RSA-2048 Key Pair
 
-The following commands generate a 2048-bit RSA private key and derive its corresponding public key:
+Generate a 2048-bit RSA private key:
 
 ```bash
 openssl genrsa -out rsa_private.pem 2048
+```
+
+Extract the corresponding RSA public key:
+
+```bash
 openssl rsa -in rsa_private.pem -pubout -out rsa_public.pem
 ```
 
-The key files can be verified with:
+Verify the keys:
 
 ```bash
 ls -lh rsa_*.pem
@@ -31,21 +36,26 @@ Observed output:
 -rw-rw-r-- 1 kali kali  451 Oct  1 13:37 rsa_public.pem
 
 Private-Key: (2048 bit, 2 primes)
+modulus:
+    00:c8:e4:f8:08:ba:12:16:e8:ac:99:32:b6:9f:53:
+    ce:c9:9b:f3:d0:06:ee:9f:43:78:4c:7e:e1:35:32:
+    68:87:9b:48:d3:75:a7:d4:4a:6d:27:49:c5:11:23:
+    ...
 ```
 
-The result confirms that a 2048-bit RSA key pair was successfully created. The private key contains the secret RSA parameters and must remain protected, while the public key can be distributed to systems that need to encrypt data for the owner or verify signatures.
+The output confirms that OpenSSL successfully generated a **2048-bit RSA private key** and its corresponding public key. The private key must remain confidential, while the public key can be distributed to other systems that need to encrypt information for the owner or verify signatures.
 
 ---
 
 ## Encrypt and Decrypt with RSA
 
-A sample MedDefense patient record was created:
+Create a small MedDefense patient record:
 
 ```bash
 echo -n "Patient: Jane Doe | DOB: 1985-03-14 | MRN: MED-50421 | Diagnosis: Atrial Fibrillation" > patient_record.txt
 ```
 
-The record was encrypted using the RSA public key:
+Encrypt the patient record using the RSA public key:
 
 ```bash
 openssl pkeyutl -encrypt \
@@ -55,7 +65,7 @@ openssl pkeyutl -encrypt \
     -out patient_record_rsa.enc
 ```
 
-The ciphertext was then decrypted using the corresponding private key:
+Decrypt the ciphertext using the RSA private key:
 
 ```bash
 openssl pkeyutl -decrypt \
@@ -64,25 +74,25 @@ openssl pkeyutl -decrypt \
     -out patient_record_rsa.dec
 ```
 
-The original and decrypted files were compared:
+Verify that the decrypted file is identical to the original:
 
 ```bash
 diff patient_record.txt patient_record_rsa.dec && echo "RSA: Files match"
 ```
 
-Output:
+Observed output:
 
 ```text
 RSA: Files match
 ```
 
-This demonstrates the basic asymmetric encryption model: a sender can encrypt information using the recipient's public key, while only the holder of the corresponding private key can decrypt it.
+The successful comparison demonstrates the basic asymmetric model. Data encrypted with the public RSA key can be recovered using the corresponding private key.
 
 ---
 
 ## Attempt to Encrypt a 100 MB File with RSA
 
-Attempting to encrypt the large test file directly produced the following error:
+Attempting to encrypt the large test file directly:
 
 ```bash
 openssl pkeyutl -encrypt \
@@ -92,7 +102,7 @@ openssl pkeyutl -encrypt \
     -out testfile_rsa.enc 2>&1
 ```
 
-Output:
+Produced:
 
 ```text
 Public Key operation error
@@ -101,9 +111,9 @@ Public Key operation error
 
 ## Why RSA Cannot Encrypt Large Files
 
-RSA operates on values smaller than its mathematical modulus, so a 2048-bit RSA key can process only a very small amount of plaintext in a single encryption operation. With the PKCS#1 v1.5 padding used in this experiment, a 2048-bit key has a 256-byte RSA block and requires at least 11 bytes of padding, leaving a maximum plaintext of approximately **245 bytes**—far less than a 100 MB file.
+RSA can operate only on plaintext small enough to fit inside the RSA modulus after the required cryptographic padding is added. With a 2048-bit RSA key and PKCS#1 v1.5 encryption padding, a single operation can encrypt only about **245 bytes**, so a 100 MB file is far too large.
 
-This means RSA is not designed for bulk file encryption. In real systems it is normally used to protect a small secret, such as a symmetric session key, while a high-speed symmetric algorithm such as AES encrypts the actual file or network traffic.
+In real systems, RSA is therefore used for small values such as cryptographic keys rather than for bulk files. A symmetric cipher such as AES encrypts the actual file, while RSA or another asymmetric mechanism helps protect or establish the symmetric key.
 
 ---
 
@@ -111,14 +121,19 @@ This means RSA is not designed for bulk file encryption. In real systems it is n
 
 ## Generate ECC Key Pair — P-256
 
-The following commands generated an elliptic-curve key pair using the NIST P-256 curve, also known as `prime256v1`:
+Generate a private key using the NIST P-256 elliptic curve:
 
 ```bash
 openssl ecparam -genkey -name prime256v1 -out ecc_private.pem
+```
+
+Generate the corresponding public key:
+
+```bash
 openssl ec -in ecc_private.pem -pubout -out ecc_public.pem
 ```
 
-The keys were verified using:
+Verify the keys:
 
 ```bash
 ls -lh ecc_*.pem
@@ -132,76 +147,110 @@ Observed output:
 -rw-rw-r-- 1 kali kali 178 Oct  1 13:50 ecc_public.pem
 
 Private-Key: (256 bit)
+priv:
+    7c:5e:6f:36:cd:bd:92:12:07:be:83:d5:c1:b0:22:
+    05:4c:b3:1b:1a:ae:dd:1a:b3:ef:4b:15:5e:ae:28:
+    dd:0c
+pub:
+    04:6c:d5:f8:ca:3a:f8:85:75:f4:66:7e:8b:23:cd:
+    ...
 ASN1 OID: prime256v1
 NIST CURVE: P-256
 ```
 
-The output confirms successful creation of a 256-bit P-256 elliptic-curve key pair.
+The output confirms successful generation of an ECC key pair using the **NIST P-256 curve**.
 
 ---
 
-## RSA vs. ECC Key Size Comparison
+## Compare RSA vs. ECC Key Sizes
 
-The private-key files produced by the experiment were approximately:
+The generated private-key files have the following approximate sizes:
 
-| Key | File Size |
-|---|---:|
-| RSA-2048 private key | 1.7 KB |
-| ECC P-256 private key | 302 bytes |
+| Key | Cryptographic Size | PEM File Size | Approximate Security Strength |
+|---|---:|---:|---:|
+| RSA private key | 2048 bits | 1.7 KB | 112 bits |
+| ECC P-256 private key | 256-bit curve | 302 bytes | 128 bits |
 
 Using the displayed file sizes:
 
 **1,700 ÷ 302 ≈ 5.6**
 
-Therefore, the RSA private-key file is approximately **5.6 times larger** than the ECC private-key file. Because `ls -lh` rounds the RSA size to 1.7 KB, the exact ratio will vary slightly depending on the actual byte count and PEM encoding.
+Therefore, the RSA private-key file is approximately **5.6 times larger** than the ECC private-key file.
 
-ECC achieves strong security with much smaller keys because the elliptic-curve discrete-logarithm problem is substantially harder per key bit than the integer-factorization problem on which RSA depends. P-256 provides approximately **128 bits of classical security**, whereas RSA-2048 provides approximately **112 bits**, meaning the 256-bit ECC key is not merely smaller—it actually provides a higher estimated security strength than the RSA-2048 key generated in this exercise.
+ECC achieves stronger security per key bit because attacking properly implemented elliptic-curve cryptography requires solving the elliptic-curve discrete logarithm problem, while RSA security depends on the difficulty of factoring large integers. NIST-equivalent security estimates place RSA-2048 at approximately **112-bit security**, P-256 at approximately **128-bit security**, and P-384 at approximately **192-bit security**.
 
-This efficiency is important for resource-constrained environments such as MedDefense's BD Alaris pumps and Philips IntelliVue monitors. Smaller keys reduce storage requirements, network overhead, and asymmetric computation, making ECC attractive for devices where CPU capacity, memory, power, and network bandwidth are more limited.
-
-A more equivalent 128-bit security comparison would be approximately:
-
-**ECC P-256 ≈ RSA-3072**
-
-rather than RSA-2048.
+This efficiency is particularly relevant to MedDefense's constrained medical-device environment. BD Alaris pumps and Philips IntelliVue monitors have more limited processing, memory, and network resources than conventional servers, so smaller ECC keys can reduce computational and communication overhead while maintaining strong cryptographic security.
 
 ---
 
 # Part 3 — The Hybrid Model
 
-Modern protocols combine asymmetric and symmetric cryptography because the two approaches solve different problems. During a TLS connection, asymmetric cryptography is used during the **handshake** to authenticate the server and establish shared keying material—modern TLS commonly uses ephemeral elliptic-curve Diffie-Hellman (ECDHE), authenticated by the server's certificate. Once both parties have established session keys, a symmetric cipher such as AES-GCM or ChaCha20-Poly1305 encrypts the actual application data because symmetric encryption is dramatically faster and can efficiently protect large quantities of information. This hybrid approach therefore obtains the key-distribution and authentication advantages of public-key cryptography without suffering the severe size and performance limitations demonstrated by the RSA large-file experiment. Neither approach alone provides this combination as effectively: symmetric encryption is excellent for bulk data but requires secure key establishment, while asymmetric cryptography solves key establishment and authentication but is inefficient for bulk encryption.
+Modern secure communications use a **hybrid cryptographic model** because symmetric and asymmetric cryptography solve different problems. Asymmetric cryptography is used during a handshake to authenticate parties and establish shared secret keying material without requiring both parties to possess the same secret beforehand. Once session keys have been established, a fast symmetric cipher such as AES-GCM encrypts the actual application data because symmetric cryptography is much more efficient for large volumes of information. This provides the key-distribution and authentication benefits of asymmetric cryptography together with the speed and scalability of symmetric encryption. As a result, the combination is superior to using asymmetric encryption for all data or trying to distribute symmetric keys manually.
 
-For the **MedDefense patient portal**, the TLS handshake performs the asymmetric authentication/key-establishment portion, after which the negotiated symmetric cipher protects patient portal traffic. The audit notes show that the portal currently supports **TLS 1.0 and TLS 1.2**, does not support TLS 1.3, and uses the default Apache cipher configuration; the exact negotiated cipher suites are not documented. Therefore, MedDefense should disable TLS 1.0, document its cipher suites, and move toward modern TLS configurations using authenticated symmetric encryption.
+For the **MedDefense patient portal**, the TLS handshake is responsible for the asymmetric authentication and key-establishment portion of the connection, while the negotiated symmetric cipher protects the bulk HTTPS application traffic after the handshake. The MedDefense audit currently confirms support for **TLS 1.0 and TLS 1.2**, with TLS 1.3 unavailable, but the exact cipher suites and key-exchange algorithms are not documented; therefore, the precise asymmetric algorithm currently negotiated by the portal cannot be established from the available evidence.
 
 ---
 
-# Part 4 — Key Length Comparison Table
+# Part 4 — Cryptographic Algorithm and Key Length Comparison
 
 ## Healthcare Interpretation
 
-HIPAA does not provide a simple list declaring individual algorithms "HIPAA approved." Instead, HHS states that ePHI should be encrypted through processes consistent with appropriate NIST guidance, with decryption keys protected separately from the encrypted information.
+HIPAA does not publish a simple whitelist of individual encryption algorithms. HHS guidance instead points organizations protecting electronic PHI toward encryption processes consistent with appropriate NIST standards and FIPS-validated cryptographic implementations.
 
-For this table, **Approved** therefore means suitable for a modern NIST-aligned MedDefense cryptographic baseline for regulated healthcare information. **Not Approved** identifies obsolete algorithms that should not be used to apply new cryptographic protection.
+For the table below:
 
-| Algorithm | Type | Key Lengths | Equivalent Security | Status | MedDefense Usage |
-|---|---|---|---|---|---|
-| **AES** | Symmetric block cipher | 128, 192, 256 bits | 128 / 192 / 256 bits respectively | **Approved / Recommended.** AES remains a standard choice for regulated data. Modern authenticated modes such as AES-GCM should generally be preferred for new application designs. | **Currently used.** Central-to-Westside and Central-to-HQ IPSec tunnels use AES-256. NAS-01 also supports AES-256-CBC shared-folder encryption, although the feature is currently disabled.  |
-| **RSA** | Asymmetric | 2048, 4096 bits | RSA-2048 ≈ **112-bit** security; RSA-4096 ≈ **149–150-bit** security | **Approved today**, when appropriately implemented. RSA should be used for authentication, signatures, or key establishment rather than bulk-data encryption. Long-term systems should also account for migration to post-quantum cryptography. | No specific RSA implementation is established in the MedDefense audit. The patient portal uses a Let's Encrypt certificate, but the audit does not document whether its public key is RSA or ECC. |
-| **ECC — P-256** | Asymmetric elliptic curve | 256-bit curve | ≈ **128-bit** security | **Approved / Recommended** for current classical cryptography. Provides high security with relatively small keys. | No existing MedDefense P-256 deployment is documented. It is a strong candidate for TLS authentication/key establishment and constrained clinical devices. |
-| **ECC — P-384** | Asymmetric elliptic curve | 384-bit curve | ≈ **192-bit** security | **Approved / Recommended.** Higher security strength than P-256 at additional computational cost. | No current MedDefense use documented. Could be considered where a higher security margin is required. |
-| **DES** | Symmetric block cipher | 56 effective key bits | ≈ **56-bit** security | **Not Approved.** DES is cryptographically obsolete and far below modern security-strength requirements. | **Currently exposed through legacy AD compatibility.** MedDefense's domain controllers still support DES Kerberos encryption. Finding 018 requires its removal. |
-| **3DES / TDEA** | Symmetric block cipher | 168 nominal bits using three keys; ≈112-bit effective strength | ≈ **112-bit** security for three-key TDEA | **Not Approved for applying new cryptographic protection.** NIST disallowed TDEA for new protection after December 31, 2023; legacy decryption/verification of previously protected data may still be allowed. | No current MedDefense 3DES deployment is documented. It should not be introduced into the new cryptographic baseline. |
-| **ChaCha20-Poly1305** | Symmetric stream cipher + authenticator / AEAD | 256-bit ChaCha20 key; 128-bit authentication tag | ChaCha20 designed for **256-bit confidentiality**, with a 128-bit Poly1305 tag | **Modern and cryptographically strong, but not a NIST/FIPS-approved primitive.** It is standardized by the IETF and widely used in modern protocols, but AES-GCM is the safer default where MedDefense requires strict NIST/FIPS alignment. RFC 8439 specifies a 256-bit key and 96-bit nonce. | No current MedDefense usage documented. Could be considered only if organizational requirements permit non-FIPS algorithms; otherwise use AES-GCM. |
-| **RC4** | Symmetric stream cipher | Historically variable; commonly 128 bits | No acceptable modern security strength | **Not Approved / Prohibited for TLS.** IETF requires TLS clients and servers never to negotiate RC4 cipher suites because of practical cryptographic weaknesses. | **Currently enabled in Active Directory Kerberos compatibility.** Finding 018 confirms RC4 remains enabled and permits RC4 service tickets that can facilitate Kerberoasting attacks. It should be disabled after legacy dependencies are identified. |
+**Approved** means suitable for new MedDefense protection of regulated healthcare data when used in an appropriate modern protocol, mode, and validated implementation.
 
-NIST's current guidance treats **security strength** as the amount of computational work required to break an algorithm. Modern systems should provide at least 112 bits of security today, while systems intended to remain in use beyond 2030 should target at least 128 bits.
+**Conditional** means cryptographically strong but not the default choice for a MedDefense environment requiring strict NIST/FIPS alignment.
 
-AES-128, AES-192, and AES-256 remain acceptable modern symmetric choices, while algorithms below modern security-strength requirements should not be used. NIST also explicitly disallowed TDEA for applying new cryptographic protection after 2023.
+**Not Approved** means the algorithm should not be used to provide new protection for MedDefense regulated data.
+
+## Unified Comparative Reference Table
+
+| Algorithm | Type | Key Length | Approx. Equivalent Security | Primary Purpose | Healthcare / Regulated-Data Status | Current Security Status | MedDefense Usage |
+|---|---|---:|---:|---|---|---|---|
+| **AES-128** | Symmetric block cipher | 128 bits | **128 bits** | Bulk encryption of files, databases, disks, VPN and TLS traffic | **Approved** | Strong. NIST lists AES-128 encryption/decryption as acceptable. | No specific AES-128 deployment documented. |
+| **AES-192** | Symmetric block cipher | 192 bits | **192 bits** | Bulk encryption where a higher security margin than AES-128 is desired | **Approved** | Strong. NIST lists AES-192 as acceptable. | No specific AES-192 deployment documented. |
+| **AES-256** | Symmetric block cipher | 256 bits | **256 bits** | High-strength bulk encryption for storage, backups, VPNs and application data | **Approved / Recommended** | Strong. NIST lists AES-256 as acceptable. | **In use:** MedDefense's IPSec site-to-site tunnels use AES-256. NAS-01 also supports AES-256-CBC shared-folder encryption, although this protection is currently disabled.  |
+| **RSA-2048** | Asymmetric | 2048-bit modulus | **≈112 bits** | Digital signatures, authentication, and key establishment; not bulk encryption | **Approved for current use, but not preferred for long-lived new deployments** | Currently acceptable in approved schemes, but its ≈112-bit strength provides less long-term margin than modern 128-bit-strength options. | No RSA implementation is specifically confirmed by the MedDefense audit. The patient portal uses a certificate, but its public-key algorithm is not documented. |
+| **RSA-4096** | Asymmetric | 4096-bit modulus | **≈150 bits** | Digital signatures, authentication, and key establishment | **Approved** | Stronger than RSA-2048 but substantially larger and computationally heavier. | No current MedDefense RSA-4096 use documented. |
+| **ECC P-256** | Asymmetric elliptic curve | 256-bit curve | **≈128 bits** | ECDH/ECDHE key agreement and ECDSA digital signatures | **Approved / Recommended** | Strong. Provides about 128-bit security with much smaller keys than RSA. | No existing deployment confirmed. Appropriate candidate for MedDefense TLS and resource-constrained medical devices. |
+| **ECC P-384** | Asymmetric elliptic curve | 384-bit curve | **≈192 bits** | Higher-strength ECDH/ECDHE and ECDSA operations | **Approved / Recommended** | Strong. Provides approximately 192-bit security. | No current MedDefense deployment documented. Suitable where a higher security margin is required. |
+| **DES** | Symmetric block cipher | 56 effective bits | **≈56 bits** | Historical bulk encryption | **Not Approved** | **Obsolete/broken for modern protection.** DES provides far too little security for regulated healthcare information. | **Legacy exposure exists:** MedDefense Active Directory still permits DES Kerberos encryption and Finding 018 requires its removal. |
+| **3DES / TDEA** | Symmetric block cipher | 168 nominal bits using three keys | **≈112 bits** | Legacy replacement for DES | **Not Approved for new protection** | NIST disallowed three-key TDEA for applying new cryptographic protection after December 31, 2023. Legacy decryption of already-protected information may continue. | No current MedDefense 3DES deployment documented. It must not be introduced into the new cryptographic baseline. |
+| **ChaCha20-Poly1305** | Symmetric stream cipher + authenticator (AEAD) | 256-bit key; 128-bit authentication tag | **256-bit key strength; 128-bit authentication tag** | Authenticated bulk encryption, especially in TLS and software environments without fast AES hardware | **Conditional** | Modern and strong. RFC 8439 specifies a 256-bit ChaCha20 key, 96-bit nonce and Poly1305 authentication. It is widely used, but it is not the default NIST/FIPS algorithm choice for a strict MedDefense compliance baseline. | No current MedDefense use documented. AES-GCM should remain the default where NIST/FIPS alignment is required. |
+| **RC4** | Symmetric stream cipher | Historically variable; commonly 128 bits | **No acceptable modern security strength** | Historical stream encryption | **Not Approved** | **Obsolete/insecure.** RFC 7465 requires TLS implementations never to negotiate RC4 because of exploitable keystream weaknesses. | **Legacy exposure exists:** MedDefense Active Directory still permits RC4 Kerberos tickets, creating Kerberoasting exposure identified in Finding 018. |
+
+## Quick Comparative Summary
+
+| Requirement | Preferred Choice | Reason |
+|---|---|---|
+| **Bulk data encryption** | **AES-256-GCM** | Fast symmetric encryption with confidentiality and authentication |
+| **General modern symmetric alternative** | **ChaCha20-Poly1305** | Efficient AEAD cipher, particularly where AES hardware acceleration is unavailable |
+| **Asymmetric key agreement / authentication with small keys** | **ECC P-256 or P-384** | Strong security with significantly smaller keys than RSA |
+| **RSA where required for compatibility** | **RSA-2048 minimum; stronger sizes for greater margin** | Widely supported but less efficient than ECC |
+| **Legacy algorithms to eliminate** | **DES, 3DES, RC4** | Obsolete, disallowed, or cryptographically inadequate for new protection |
+
+---
+
+# MedDefense Implications
+
+The comparison highlights a direct difference between MedDefense's strong and weak cryptographic implementations. The Central-to-Westside and Central-to-HQ VPN tunnels already use **AES-256 with SHA-256, IKEv2, and DH Group 14**, which the internal audit considers adequate.
+
+In contrast, Active Directory still permits **DES and RC4**, even though AES-128 and AES-256 Kerberos encryption are also available. MedDefense should therefore eliminate DES and RC4 after validating legacy dependencies and require AES-based Kerberos encryption.
+
+The data-protection inventory also demonstrates where strong symmetric encryption is still absent. The EHR PostgreSQL database is unencrypted at rest, the billing MySQL database is unencrypted at rest and transmitted using plaintext MySQL, PACS images are stored and transmitted without DICOM TLS, and NAS-01 backups remain unencrypted.   
+
+These systems are therefore the principal targets for applying the modern algorithms identified in the comparison table.
 
 ---
 
 # Conclusion
 
-The experiments demonstrate the fundamental trade-off between symmetric and asymmetric cryptography. RSA successfully protected the small patient record, but immediately failed when asked to encrypt a 100 MB file because RSA can process only messages that fit within its modulus and padding limits. ECC demonstrated that asymmetric security can be achieved with dramatically smaller keys: the generated P-256 private-key file was approximately one-sixth the size of the RSA-2048 private-key file while providing a higher estimated classical security strength.
+The RSA experiment demonstrates both the advantage and limitation of asymmetric cryptography. RSA successfully encrypted the small patient record, but the 100 MB test immediately failed with a **“data too large for key size”** error, proving that RSA is unsuitable for bulk encryption.
 
-These observations explain the design of modern protocols such as TLS. Asymmetric cryptography provides authentication and secure key establishment, while symmetric algorithms such as AES handle high-volume application data efficiently. For MedDefense, this model is directly relevant to the patient portal, VPN tunnels, database connections, backup encryption, and future secure communications with clinical devices.
+The ECC experiment demonstrates that strong asymmetric security does not require extremely large keys. The 302-byte P-256 private-key file was approximately **5.6 times smaller** than the 1.7 KB RSA-2048 private-key file while providing approximately **128-bit security compared with RSA-2048's 112-bit security**.
+
+These results explain the hybrid design of protocols such as TLS. Asymmetric algorithms such as RSA or ECC solve authentication and key-establishment problems, while symmetric algorithms such as AES perform the high-volume encryption efficiently.
+
+For MedDefense, the appropriate direction is therefore to standardize on **AES for regulated-data encryption, modern ECC or sufficiently strong RSA for asymmetric functions, and the complete retirement of DES, 3DES, and RC4 from new cryptographic protection**. Existing AES-256 VPN protection provides a useful model, while the unencrypted databases, PACS traffic, backups, and legacy Active Directory cryptography identify the systems where the cryptographic baseline must be improved.
