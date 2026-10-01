@@ -111,8 +111,8 @@ Therefore:
 
 | Algorithm | Output Size | Possible Outputs | Generic Collision Work |
 |---|---:|---:|---:|
-| **MD5** | 128 bits | 2¹²⁸ | approximately **2⁶⁴** |
-| **SHA-256** | 256 bits | 2²⁵⁶ | approximately **2¹²⁸** |
+| **MD5** | 128 bits | 2^128 | approximately **2^64** |
+| **SHA-256** | 256 bits | 2^256 | approximately **2^128** |
 
 A shorter digest therefore reduces the theoretical work needed for a collision attack. In addition, MD5 has known structural weaknesses that make practical collision creation substantially easier than an ideal 128-bit hash would suggest.
 
