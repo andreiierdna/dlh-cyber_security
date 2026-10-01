@@ -148,7 +148,7 @@ A lookup of:
 482c811da5d5b4bc6d497ffa98491e38
 ```
 
-on CrackStation returned:
+on crackstation.net returned:
 
 ```text
 Result: password123
@@ -173,7 +173,7 @@ Output:
 6d537fa53f1db2c22b0451ef4ef9fbe8  -
 ```
 
-The CrackStation lookup returned:
+The crackstation.net lookup returned:
 
 ```text
 Result: Not found
