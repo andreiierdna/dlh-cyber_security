@@ -1,24 +1,7 @@
 #!/bin/bash
 
-# 11-audit_coverage_test.sh - Prove that the Task 10 audit rules capture the events MedDefense cares about.
-#
-# MedDefense 2x00 "Locking the Gates" - Task 11
-# 1x00: the attacker moved undetected for 5 days. A rule that never fires is worse than no rule
-# (false confidence), so every test below triggers one controlled, harmless event and checks the
-# audit log for it. Results go to audit_validation.json (compliance evidence).
-#
-# Safety: no accounts are created, nothing is downloaded, no cron job ever becomes runnable and
-# no production file is modified:
-#   1 sudo execution      : root runs "sudo -n true"
-#   2 shadow access       : user "nobody" attempts to open /etc/shadow for writing -> EACCES
-#                           (the attempt itself is audited; the file is untouched)
-#   3 download tool       : "curl --version" (no network access)
-#   4 sshd config check   : read + no-op chmod to the current mode. The rule watches -p wa,
-#                           so plain reads are not audited by design; the metadata operation is.
-#   5 monitored file write: create/delete a temporary file directly under /etc/apache2/
-#                           (watched by meddefense_web; Apache only loads named/included files)
-#   6 cron configuration  : create/delete a comment-only file in /etc/cron.d/ (never runnable)
-# All artifacts are removed by a cleanup trap, also on error/interrupt, and verified gone.
+# 11-audit_coverage_test.sh - Prove that the Task 10 audit rules
+#                           capture the events MedDefense cares about.
 #
 # Usage: sudo ./11-audit_coverage_test.sh [output.json]   (default: audit_validation.json)
 
