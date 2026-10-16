@@ -1,0 +1,99 @@
+{
+  "host": "billing-srv-01",
+  "timestamp": "2026-10-15T11:48:20+02:00",
+  "summary": {
+    "tests_executed": 6,
+    "captured": 6,
+    "missed": 0
+  },
+  "tests": [
+    {
+      "id": 1,
+      "test_name": "sudo execution",
+      "expected_key": "priv_esc",
+      "command": "sudo -n true",
+      "timestamp": "2026-10-15T11:48:02+02:00",
+      "capture_status": "CAPTURED",
+      "event_count": 1,
+      "excerpt": "msg=audit(10/15/26 11:48:02.502:356) syscall=execve success=yes exit=0 auid=medadmin uid=root comm=sudo exe=/usr/bin/sudo key=priv_esc"
+    },
+    {
+      "id": 2,
+      "test_name": "shadow access",
+      "expected_key": "identity",
+      "command": "runuser -u nobody -- /bin/sh -c ': >> /etc/shadow'",
+      "timestamp": "2026-10-15T11:48:05+02:00",
+      "capture_status": "CAPTURED",
+      "event_count": 1,
+      "excerpt": "msg=audit(10/15/26 11:48:05.654:365) syscall=openat success=no exit=EACCES(Permission auid=medadmin uid=nobody comm=sh exe=/usr/bin/dash key=identity"
+    },
+    {
+      "id": 3,
+      "test_name": "suspicious download tool",
+      "expected_key": "suspicious_download",
+      "command": "curl --version",
+      "timestamp": "2026-10-15T11:48:08+02:00",
+      "capture_status": "CAPTURED",
+      "event_count": 1,
+      "excerpt": "msg=audit(10/15/26 11:48:08.905:368) syscall=execve success=yes exit=0 auid=medadmin uid=root comm=curl exe=/usr/bin/curl key=suspicious_download"
+    },
+    {
+      "id": 4,
+      "test_name": "sshd config read",
+      "expected_key": "sshd_config",
+      "command": "cat /etc/ssh/sshd_config > /dev/null; chmod $(stat -c %a /etc/ssh/sshd_config) /etc/ssh/sshd_config",
+      "timestamp": "2026-10-15T11:48:11+02:00",
+      "capture_status": "CAPTURED",
+      "event_count": 1,
+      "excerpt": "msg=audit(10/15/26 11:48:11.981:369) syscall=fchmodat success=yes exit=0 auid=medadmin uid=root comm=chmod exe=/usr/bin/chmod key=sshd_config"
+    },
+    {
+      "id": 5,
+      "test_name": "monitored test file write",
+      "expected_key": "meddefense_web",
+      "command": "echo 'MedDefense audit coverage test - safe to delete' > /etc/apache2/.meddefense-audit-test.tmp; rm -f /etc/apache2/.meddefense-audit-test.tmp",
+      "timestamp": "2026-10-15T11:48:15+02:00",
+      "capture_status": "CAPTURED",
+      "event_count": 2,
+      "excerpt": "msg=audit(10/15/26 11:48:15.049:370) syscall=openat success=yes exit=3 auid=medadmin uid=root comm=bash exe=/usr/bin/bash key=meddefense_web"
+    },
+    {
+      "id": 6,
+      "test_name": "cron configuration check",
+      "expected_key": "cron_config",
+      "command": "echo '# MedDefense audit coverage test - comment only, never runs' > /etc/cron.d/meddefense-audit-test; rm -f /etc/cron.d/meddefense-audit-test",
+      "timestamp": "2026-10-15T11:48:18+02:00",
+      "capture_status": "CAPTURED",
+      "event_count": 2,
+      "excerpt": "msg=audit(10/15/26 11:48:18.097:372) syscall=openat success=yes exit=3 auid=medadmin uid=root comm=bash exe=/usr/bin/bash key=cron_config"
+    }
+  ],
+  "cleanup": {
+    "status": "clean",
+    "artifacts": [
+      "/etc/apache2/.meddefense-audit-test.tmp",
+      "/etc/cron.d/meddefense-audit-test"
+    ],
+    "remaining": []
+  },
+  "active_rules": [
+    "-w /etc/passwd -p wa -k identity",
+    "-w /etc/shadow -p wa -k identity",
+    "-w /etc/group -p wa -k identity",
+    "-w /etc/pam.d -p wa -k pam_config",
+    "-w /etc/ssh/sshd_config -p wa -k sshd_config",
+    "-w /usr/bin/sudo -p x -k priv_esc",
+    "-w /usr/bin/su -p x -k priv_esc",
+    "-w /etc/sudoers -p wa -k sudoers",
+    "-w /usr/bin/wget -p x -k suspicious_download",
+    "-w /usr/bin/curl -p x -k suspicious_download",
+    "-w /usr/bin/nc -p x -k suspicious_netcat",
+    "-w /var/lib/mysql -p wa -k meddefense_db",
+    "-w /etc/apache2 -p wa -k meddefense_web",
+    "-w /etc/init.d -p wa -k startup_scripts",
+    "-w /etc/crontab -p wa -k cron_config",
+    "-w /etc/cron.d -p wa -k cron_config",
+    "-w /var/spool/cron/crontabs -p wa -k cron_config",
+    "-w /usr/bin/nc.openbsd -p x -k suspicious_netcat"
+  ]
+}
