@@ -1,0 +1,1138 @@
+{
+  "timestamp": "2026-10-15T11:16:11+02:00",
+  "system": {
+    "hostname": "billing-srv-01",
+    "os": "Ubuntu 22.04.5 LTS",
+    "kernel": "5.15.0-174-generic",
+    "uptime": "up 4 hours, 48 minutes"
+  },
+  "summary": {
+    "running_services": 26,
+    "enabled_services": 53,
+    "open_ports": 10,
+    "suid_binaries": 16,
+    "sgid_binaries": 8,
+    "world_writable_files": 0
+  },
+  "services": {
+    "running": [
+      "apache2.service",
+      "auditd.service",
+      "cron.service",
+      "dbus.service",
+      "getty@tty1.service",
+      "irqbalance.service",
+      "ModemManager.service",
+      "multipathd.service",
+      "mysql.service",
+      "networkd-dispatcher.service",
+      "packagekit.service",
+      "polkit.service",
+      "rsyslog.service",
+      "snapd.service",
+      "snmpd.service",
+      "ssh.service",
+      "systemd-journald.service",
+      "systemd-logind.service",
+      "systemd-networkd.service",
+      "systemd-resolved.service",
+      "systemd-timesyncd.service",
+      "systemd-udevd.service",
+      "udisks2.service",
+      "unattended-upgrades.service",
+      "upower.service",
+      "user@1000.service"
+    ],
+    "enabled": [
+      "apache2.service",
+      "apparmor.service",
+      "auditd.service",
+      "blk-availability.service",
+      "cloud-config.service",
+      "cloud-final.service",
+      "cloud-init-local.service",
+      "cloud-init.service",
+      "console-setup.service",
+      "cron.service",
+      "dmesg.service",
+      "e2scrub_reap.service",
+      "finalrd.service",
+      "getty@.service",
+      "gpu-manager.service",
+      "grub-common.service",
+      "grub-initrd-fallback.service",
+      "irqbalance.service",
+      "keyboard-setup.service",
+      "lvm2-monitor.service",
+      "lxd-agent.service",
+      "ModemManager.service",
+      "multipathd.service",
+      "mysql.service",
+      "netfilter-persistent.service",
+      "networkd-dispatcher.service",
+      "open-iscsi.service",
+      "open-vm-tools.service",
+      "pollinate.service",
+      "rsyslog.service",
+      "secureboot-db.service",
+      "setvtrgb.service",
+      "snap.lxd.activate.service",
+      "snapd.apparmor.service",
+      "snapd.autoimport.service",
+      "snapd.core-fixup.service",
+      "snapd.recovery-chooser-trigger.service",
+      "snapd.seeded.service",
+      "snapd.service",
+      "snapd.system-shutdown.service",
+      "snmpd.service",
+      "ssh.service",
+      "systemd-networkd-wait-online.service",
+      "systemd-networkd.service",
+      "systemd-pstore.service",
+      "systemd-resolved.service",
+      "systemd-timesyncd.service",
+      "thermald.service",
+      "ua-reboot-cmds.service",
+      "ubuntu-advantage.service",
+      "udisks2.service",
+      "unattended-upgrades.service",
+      "vgauth.service"
+    ],
+    "all": [
+      {
+        "unit": "apache2.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "apparmor.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "apport-autoreport.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "apport.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "apt-daily-upgrade.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "apt-daily.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "auditd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "blk-availability.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "cloud-config.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "cloud-final.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "cloud-init-hotplugd.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "cloud-init-local.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "cloud-init.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "connman.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "console-screen.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "console-setup.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "cron.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "dbus.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "display-manager.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "dm-event.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "dmesg.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "dpkg-db-backup.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "e2scrub_all.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "e2scrub_reap.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "emergency.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "fcoe.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "finalrd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "fstrim.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "fwupd-refresh.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "getty-static.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "getty@tty1.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "grub-common.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "grub-initrd-fallback.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "hv_kvp_daemon.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ip6tables.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "iptables.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "irqbalance.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "iscsi-shutdown.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "iscsid.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "kbd.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "keyboard-setup.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "kmod-static-nodes.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "logrotate.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "lvm2-activation-early.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "lvm2-activation.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "lvm2-lvmpolld.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "lvm2-monitor.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "lvm2-pvscan@8:3.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "lxd-agent.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "lynis.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "man-db.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ModemManager.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "modprobe@configfs.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "modprobe@drm.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "modprobe@efi_pstore.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "modprobe@fuse.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "motd-news.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "multipathd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "mysql.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "netfilter-persistent.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "netplan-ovs-cleanup.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "networkd-dispatcher.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "networking.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "NetworkManager.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "open-iscsi.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "open-vm-tools.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ovsdb-server.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "packagekit.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "phpsessionclean.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "plymouth-quit-wait.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "plymouth-quit.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "plymouth-read-write.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "plymouth-start.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "polkit.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "pollinate.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "rbdmap.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "rc-local.service",
+        "load": "loaded",
+        "active": "failed",
+        "sub": "failed"
+      },
+      {
+        "unit": "rescue.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "rsyslog.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "secureboot-db.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "setvtrgb.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "snap.lxd.activate.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snap.lxd.daemon.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snap.lxd.user-daemon.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snapd.apparmor.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "snapd.autoimport.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snapd.core-fixup.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snapd.failure.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snapd.recovery-chooser-trigger.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snapd.seeded.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "snapd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "snapd.snap-repair.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "snmpd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "ssh.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "sshd-keygen.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-ask-password-console.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-ask-password-plymouth.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-ask-password-wall.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-binfmt.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-boot-system-token.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-fsck-root.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-fsck@dev-disk-by\\x2duuid-907d4524\\x2dc1c7\\x2d4387\\x2da530\\x2d8bfda4b27e0d.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-fsckd.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-hwdb-update.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-initctl.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-journal-flush.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-journald.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "systemd-logind.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "systemd-machine-id-commit.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-modules-load.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-networkd-wait-online.service",
+        "load": "loaded",
+        "active": "failed",
+        "sub": "failed"
+      },
+      {
+        "unit": "systemd-networkd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "systemd-pstore.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-quotacheck.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-random-seed.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-remount-fs.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-resolved.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "systemd-rfkill.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-sysctl.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-sysusers.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-timesyncd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "systemd-tmpfiles-clean.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-tmpfiles-setup-dev.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-tmpfiles-setup.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-udev-trigger.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-udevd.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "systemd-update-done.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-update-utmp-runlevel.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "systemd-update-utmp.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-user-sessions.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "systemd-vconsole-setup.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "thermald.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ua-auto-attach.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ua-reboot-cmds.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ua-timer.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ubuntu-advantage-cloud-id-shim.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "ubuntu-advantage.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "udisks2.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "unattended-upgrades.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "update-notifier-download.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "update-notifier-motd.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "upower.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "user-runtime-dir@1000.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "exited"
+      },
+      {
+        "unit": "user@1000.service",
+        "load": "loaded",
+        "active": "active",
+        "sub": "running"
+      },
+      {
+        "unit": "uuidd.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "vgauth.service",
+        "load": "loaded",
+        "active": "inactive",
+        "sub": "dead"
+      },
+      {
+        "unit": "zfs-mount.service",
+        "load": "not-found",
+        "active": "inactive",
+        "sub": "dead"
+      }
+    ]
+  },
+  "listening_sockets": [
+    {
+      "proto": "udp",
+      "local_address": "127.0.0.53%lo:53",
+      "process": "users:((\"systemd-resolve\",pid=700,fd=13))"
+    },
+    {
+      "proto": "udp",
+      "local_address": "10.0.2.15%enp0s3:68",
+      "process": "users:((\"systemd-network\",pid=698,fd=19))"
+    },
+    {
+      "proto": "udp",
+      "local_address": "127.0.0.1:161",
+      "process": "users:((\"snmpd\",pid=741,fd=6))"
+    },
+    {
+      "proto": "udp",
+      "local_address": "[::1]:161",
+      "process": "users:((\"snmpd\",pid=741,fd=7))"
+    },
+    {
+      "proto": "tcp",
+      "local_address": "127.0.0.53%lo:53",
+      "process": "users:((\"systemd-resolve\",pid=700,fd=14))"
+    },
+    {
+      "proto": "tcp",
+      "local_address": "0.0.0.0:3306",
+      "process": "users:((\"mysqld\",pid=850,fd=23))"
+    },
+    {
+      "proto": "tcp",
+      "local_address": "127.0.0.1:33060",
+      "process": "users:((\"mysqld\",pid=850,fd=21))"
+    },
+    {
+      "proto": "tcp",
+      "local_address": "0.0.0.0:22",
+      "process": "users:((\"sshd\",pid=810,fd=3))"
+    },
+    {
+      "proto": "tcp",
+      "local_address": "*:80",
+      "process": "users:((\"apache2\",pid=899,fd=4),(\"apache2\",pid=898,fd=4),(\"apache2\",pid=897,fd=4),(\"apache2\",pid=896,fd=4),(\"apache2\",pid=895,fd=4),(\"apache2\",pid=826,fd=4))"
+    },
+    {
+      "proto": "tcp",
+      "local_address": "[::]:22",
+      "process": "users:((\"sshd\",pid=810,fd=4))"
+    }
+  ],
+  "suid_binaries": [
+    "/opt/legacy/setuid-app",
+    "/usr/bin/chfn",
+    "/usr/bin/chsh",
+    "/usr/bin/fusermount3",
+    "/usr/bin/gpasswd",
+    "/usr/bin/mount",
+    "/usr/bin/newgrp",
+    "/usr/bin/passwd",
+    "/usr/bin/pkexec",
+    "/usr/bin/su",
+    "/usr/bin/sudo",
+    "/usr/bin/umount",
+    "/usr/lib/dbus-1.0/dbus-daemon-launch-helper",
+    "/usr/lib/openssh/ssh-keysign",
+    "/usr/libexec/polkit-agent-helper-1",
+    "/usr/local/bin/oldtool"
+  ],
+  "sgid_binaries": [
+    "/usr/bin/chage",
+    "/usr/bin/crontab",
+    "/usr/bin/expiry",
+    "/usr/bin/ssh-agent",
+    "/usr/lib/x86_64-linux-gnu/utempter/utempter",
+    "/usr/local/bin/shared",
+    "/usr/sbin/pam_extrausers_chkpwd",
+    "/usr/sbin/unix_chkpwd"
+  ],
+  "world_writable_files": [],
+  "sysctl": {
+    "net.ipv4.ip_forward": "1",
+    "net.ipv4.conf.all.accept_redirects": "0",
+    "net.ipv4.conf.default.accept_redirects": "1",
+    "net.ipv4.conf.all.send_redirects": "1",
+    "net.ipv4.conf.all.accept_source_route": "0",
+    "net.ipv4.conf.all.log_martians": "0",
+    "net.ipv4.tcp_syncookies": "1",
+    "net.ipv4.icmp_echo_ignore_broadcasts": "1",
+    "net.ipv6.conf.all.disable_ipv6": "0",
+    "net.ipv6.conf.default.disable_ipv6": "0",
+    "kernel.randomize_va_space": "2",
+    "fs.suid_dumpable": "2",
+    "kernel.dmesg_restrict": "1",
+    "kernel.kptr_restrict": "1"
+  },
+  "ssh_config": {
+    "port": "22",
+    "listenaddress": "0.0.0.0:22",
+    "usepam": "yes",
+    "logingracetime": "120",
+    "maxauthtries": "6",
+    "clientaliveinterval": "0",
+    "clientalivecountmax": "3",
+    "permitrootlogin": "yes",
+    "pubkeyauthentication": "yes",
+    "passwordauthentication": "yes",
+    "kbdinteractiveauthentication": "no",
+    "x11forwarding": "yes",
+    "permitemptypasswords": "no",
+    "banner": "none"
+  },
+  "users": {
+    "login_accounts": [
+      {
+        "user": "root",
+        "uid": 0,
+        "home": "/root",
+        "shell": "/bin/bash"
+      },
+      {
+        "user": "analyst",
+        "uid": 1000,
+        "home": "/home/analyst",
+        "shell": "/bin/bash"
+      },
+      {
+        "user": "medadmin",
+        "uid": 1001,
+        "home": "/home/medadmin",
+        "shell": "/bin/bash"
+      },
+      {
+        "user": "sysadmin",
+        "uid": 1002,
+        "home": "/home/sysadmin",
+        "shell": "/bin/bash"
+      },
+      {
+        "user": "mike",
+        "uid": 1003,
+        "home": "/home/mike",
+        "shell": "/bin/bash"
+      }
+    ],
+    "sudo_group": [
+      "analyst",
+      "medadmin",
+      "sysadmin"
+    ]
+  }
+}

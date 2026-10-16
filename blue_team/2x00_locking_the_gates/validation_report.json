@@ -1,0 +1,691 @@
+{
+  "host": "billing-srv-01",
+  "timestamp": "2026-10-15T11:48:21+02:00",
+  "summary": {
+    "checks": 97,
+    "pass": 97,
+    "fail": 0,
+    "compliant": true
+  },
+  "checks": [
+    {
+      "task": 4,
+      "control": "PermitRootLogin",
+      "expected": "no",
+      "actual": "no",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "PasswordAuthentication",
+      "expected": "no",
+      "actual": "no",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "PermitEmptyPasswords",
+      "expected": "no",
+      "actual": "no",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "X11Forwarding",
+      "expected": "no",
+      "actual": "no",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "MaxAuthTries",
+      "expected": "3",
+      "actual": "3",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "ClientAliveInterval",
+      "expected": "300",
+      "actual": "300",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "ClientAliveCountMax",
+      "expected": "2",
+      "actual": "2",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "AllowUsers",
+      "expected": "medadmin sysadmin",
+      "actual": "medadmin sysadmin",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "LoginGraceTime",
+      "expected": "60",
+      "actual": "60",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "Banner",
+      "expected": "/etc/issue.net",
+      "actual": "/etc/issue.net",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "/etc/issue.net present",
+      "expected": "yes",
+      "actual": "yes",
+      "status": "PASS"
+    },
+    {
+      "task": 4,
+      "control": "ssh.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.ip_forward",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.conf.all.accept_redirects",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.conf.default.accept_redirects",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.conf.all.send_redirects",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.conf.all.accept_source_route",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.conf.all.log_martians",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.tcp_syncookies",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv4.icmp_echo_ignore_broadcasts",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv6.conf.all.disable_ipv6",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "net.ipv6.conf.default.disable_ipv6",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "kernel.randomize_va_space",
+      "expected": "2",
+      "actual": "2",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "fs.suid_dumpable",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "kernel.dmesg_restrict",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 5,
+      "control": "kernel.kptr_restrict",
+      "expected": "2",
+      "actual": "2",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "Non-whitelisted SUID binaries",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "Non-whitelisted SGID binaries",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "World-writable files",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "/tmp mount options",
+      "expected": "noexec,nosuid,nodev",
+      "actual": "noexec,nosuid,nodev",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "/var/tmp mount options",
+      "expected": "noexec,nosuid,nodev",
+      "actual": "noexec,nosuid,nodev",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "/dev/shm mount options",
+      "expected": "noexec,nosuid,nodev",
+      "actual": "noexec,nosuid,nodev",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "/etc/cron.allow present",
+      "expected": "yes",
+      "actual": "yes",
+      "status": "PASS"
+    },
+    {
+      "task": 6,
+      "control": "/etc/cron.deny absent",
+      "expected": "yes",
+      "actual": "yes",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "ssh.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "apache2.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "mysql.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "ufw.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "auditd.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "apparmor.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "cron.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "rsyslog.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "systemd-timesyncd.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "avahi-daemon.service",
+      "expected": "disabled",
+      "actual": "disabled",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "cups.service",
+      "expected": "disabled",
+      "actual": "disabled",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "bluetooth.service",
+      "expected": "disabled",
+      "actual": "disabled",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "ModemManager.service",
+      "expected": "disabled",
+      "actual": "disabled",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "snmpd.service",
+      "expected": "disabled",
+      "actual": "disabled",
+      "status": "PASS"
+    },
+    {
+      "task": 7,
+      "control": "rpcbind.service",
+      "expected": "disabled",
+      "actual": "disabled",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality minlen",
+      "expected": "14",
+      "actual": "14",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality dcredit",
+      "expected": "-1",
+      "actual": "-1",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality ucredit",
+      "expected": "-1",
+      "actual": "-1",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality lcredit",
+      "expected": "-1",
+      "actual": "-1",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality ocredit",
+      "expected": "-1",
+      "actual": "-1",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality maxrepeat",
+      "expected": "3",
+      "actual": "3",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwquality usercheck (reject_username)",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "faillock deny",
+      "expected": "5",
+      "actual": "5",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "faillock unlock_time",
+      "expected": "900",
+      "actual": "900",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "faillock fail_interval",
+      "expected": "900",
+      "actual": "900",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "common-auth pam_faillock",
+      "expected": "2",
+      "actual": "2",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "common-password pam_pwquality",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 8,
+      "control": "pwhistory remember",
+      "expected": "12",
+      "actual": "12",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "AppArmor module",
+      "expected": "Y",
+      "actual": "Y",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "apparmor.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "AppArmor apache2 profile",
+      "expected": "enforce",
+      "actual": "enforce",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "AppArmor /usr/sbin/mysqld profile",
+      "expected": "enforce",
+      "actual": "enforce",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "AppArmor meddefense-billing-app profile",
+      "expected": "enforce",
+      "actual": "enforce",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "apache2 process confinement",
+      "expected": "apache2 (enforce)",
+      "actual": "apache2 (enforce)",
+      "status": "PASS"
+    },
+    {
+      "task": 9,
+      "control": "mysqld process confinement",
+      "expected": "/usr/sbin/mysqld (enforce)",
+      "actual": "/usr/sbin/mysqld (enforce)",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "auditd.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/passwd -p wa -k identity]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/shadow -p wa -k identity]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/group -p wa -k identity]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/pam.d -p wa -k pam_config]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/ssh/sshd_config -p wa -k sshd_config]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /usr/bin/sudo -p x -k priv_esc]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /usr/bin/su -p x -k priv_esc]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/sudoers -p wa -k sudoers]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /usr/bin/wget -p x -k suspicious_download]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /usr/bin/curl -p x -k suspicious_download]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /usr/bin/nc -p x -k suspicious_netcat]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /var/lib/mysql -p wa -k meddefense_db]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/apache2 -p wa -k meddefense_web]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 10,
+      "control": "audit rule [-w /etc/init.d -p wa -k startup_scripts]",
+      "expected": "loaded",
+      "actual": "loaded",
+      "status": "PASS"
+    },
+    {
+      "task": 12,
+      "control": "rsyslog.service",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 12,
+      "control": "/var/log/auth.log mode",
+      "expected": "640",
+      "actual": "640",
+      "status": "PASS"
+    },
+    {
+      "task": 12,
+      "control": "/var/log/syslog mode",
+      "expected": "640",
+      "actual": "640",
+      "status": "PASS"
+    },
+    {
+      "task": 12,
+      "control": "rsyslog auth routing",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "task": 12,
+      "control": "auth.log retention (days)",
+      "expected": "90",
+      "actual": "90",
+      "status": "PASS"
+    },
+    {
+      "task": 12,
+      "control": "syslog retention (days)",
+      "expected": "60",
+      "actual": "60",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "UFW status",
+      "expected": "active",
+      "actual": "active",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "Default incoming",
+      "expected": "deny",
+      "actual": "deny",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "Default outgoing",
+      "expected": "allow",
+      "actual": "allow",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "UFW logging",
+      "expected": "on",
+      "actual": "on",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "SSH 22/tcp restricted to 10.10.1.0/24",
+      "expected": "10.10.1.0/24",
+      "actual": "10.10.1.0/24",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "MySQL 3306/tcp restricted to 10.10.2.0/24",
+      "expected": "10.10.2.0/24",
+      "actual": "10.10.2.0/24",
+      "status": "PASS"
+    },
+    {
+      "task": 13,
+      "control": "Allow rules (IPv4)",
+      "expected": "4",
+      "actual": "4",
+      "status": "PASS"
+    }
+  ]
+}
