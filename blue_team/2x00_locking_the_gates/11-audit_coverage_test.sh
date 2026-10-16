@@ -25,8 +25,8 @@ cleanup() {
 	rm -f "${ARTIFACTS[@]}"
 }
 
-RESULTS=$(mktemp)
-on_exit() { cleanup; rm -f "$RESULTS"; }
+TMP_JSONL=$(mktemp)
+on_exit() { cleanup; rm -f "$TMP_JSONL"; }
 on_signal() { exit 130; }
 trap on_exit EXIT
 trap on_signal INT TERM
@@ -62,7 +62,7 @@ run_test() {
 	jq -n --argjson id "$n" --arg name "$name" --arg key "$key" --arg cmd "$command" \
 		--arg ts "$ts" --arg status "$status" --argjson count "$count" --arg excerpt "$excerpt" \
 		'{id: $id, test_name: $name, expected_key: $key, command: $cmd, timestamp: $ts,
-		  capture_status: $status, event_count: $count, excerpt: $excerpt}' >> "$RESULTS"
+		  capture_status: $status, event_count: $count, excerpt: $excerpt}' >> "$TMP_JSONL"
 }
 
 echo "[*] Running audit telemetry coverage tests..."
@@ -102,7 +102,7 @@ jq -s \
 		tests: .,
 		cleanup: {status: $clean, artifacts: $artifacts, remaining: $left},
 		active_rules: $rules
-	}' "$RESULTS" > "$OUT"
+	}' "$TMP_JSONL" > "$OUT"
 
 echo "Tests executed: $TOTAL"
 echo "Captured: $CAPTURED"

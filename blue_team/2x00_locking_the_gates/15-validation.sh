@@ -16,7 +16,7 @@ export LC_ALL=C
 JSON_OUT="$1"
 PASS=0
 FAIL=0
-RESULTS=()
+CHECK_ROWS=()
 
 if [ "$EUID" -ne 0 ]; then
 	echo "Error: run as root (sudo $0) - sshd -T, auditctl and ufw need root to read state" >&2
@@ -35,7 +35,7 @@ check() {
 		FAIL=$((FAIL + 1))
 		echo "[FAIL] $label = ${actual:-<unset>} (expected: $expected)"
 	fi
-	RESULTS+=("$task"$'\t'"$label"$'\t'"$expected"$'\t'"$actual"$'\t'"$status")
+	CHECK_ROWS+=("$task"$'\t'"$label"$'\t'"$expected"$'\t'"$actual"$'\t'"$status")
 }
 
 # --- Task 4: SSH (effective configuration, includes drop-ins) ---------------------------------
@@ -180,7 +180,7 @@ TOTAL=$((PASS + FAIL))
 echo "Checks: $TOTAL | PASS: $PASS | FAIL: $FAIL"
 
 if [ -n "$JSON_OUT" ] && command -v jq >/dev/null 2>&1; then
-	printf '%s\n' "${RESULTS[@]}" | jq -R -s \
+	printf '%s\n' "${CHECK_ROWS[@]}" | jq -R -s \
 		--arg host "$(hostname)" --arg ts "$(date -Iseconds)" \
 		--argjson pass "$PASS" --argjson fail "$FAIL" '
 		{
