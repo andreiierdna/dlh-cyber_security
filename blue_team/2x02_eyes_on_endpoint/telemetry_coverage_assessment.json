@@ -1,0 +1,206 @@
+{
+  "generated_at": "2026-11-03T23:17:50Z",
+  "platforms": [
+    "windows",
+    "linux"
+  ],
+  "total_events": 42762,
+  "events_by_platform": {
+    "linux": 31337,
+    "windows": 11425
+  },
+  "events_by_source_type": {
+    "audit": 30565,
+    "auth": 92,
+    "powershell": 5663,
+    "syslog": 680,
+    "sysmon": 1422,
+    "windows_security": 4340
+  },
+  "events_by_event_category": {
+    "Dns query (rule: DnsQuery)": 199,
+    "Executing Pipeline": 5663,
+    "File System": 30,
+    "File created (rule: FileCreate)": 459,
+    "File creation time changed (rule: FileCreateTime)": 2,
+    "Kerberos Authentication Service": 5,
+    "Logoff": 301,
+    "Logon": 548,
+    "Network connection detected (rule: NetworkConnect)": 73,
+    "Other Policy Change Events": 1,
+    "Process Create (rule: ProcessCreate)": 155,
+    "Process Creation": 788,
+    "Process terminated (rule: ProcessTerminate)": 1,
+    "Registry": 58,
+    "Registry object added or deleted (rule: RegistryEvent)": 20,
+    "Registry value set (rule: RegistryEvent)": 511,
+    "Security State Change": 1,
+    "Sensitive Privilege Use": 2145,
+    "Special Logon": 376,
+    "Sysmon config state changed": 1,
+    "Sysmon service state changed": 1,
+    "User Account Management": 87,
+    "error": 4,
+    "file_access": 195,
+    "network": 6064,
+    "other": 678,
+    "pam": 50,
+    "process_exec": 24306,
+    "service": 15,
+    "ssh_login": 2,
+    "sudo": 23
+  },
+  "detection_summary": {
+    "total_simulated_actions": 12,
+    "captured_actions": 12,
+    "missed_actions": 0,
+    "multi_source_detections": 2,
+    "coverage_percent": 100
+  },
+  "attack_coverage": {
+    "covered": [
+      {
+        "technique": "T1003.008",
+        "description": "/etc/passwd and /etc/shadow",
+        "platforms": [
+          "linux"
+        ],
+        "sources": [
+          "auditd"
+        ]
+      },
+      {
+        "technique": "T1053.003",
+        "description": "Cron",
+        "platforms": [
+          "linux"
+        ],
+        "sources": [
+          "auditd"
+        ]
+      },
+      {
+        "technique": "T1053.005",
+        "description": "Scheduled Task/Job: Scheduled Task",
+        "platforms": [
+          "windows"
+        ],
+        "sources": [
+          "Sysmon"
+        ]
+      },
+      {
+        "technique": "T1059",
+        "description": "Command and Scripting Interpreter",
+        "platforms": [
+          "linux"
+        ],
+        "sources": [
+          "auditd"
+        ]
+      },
+      {
+        "technique": "T1059.001",
+        "description": "PowerShell / T1027 Obfuscated Files or Information",
+        "platforms": [
+          "windows"
+        ],
+        "sources": [
+          "PS ScriptBlock",
+          "Sysmon"
+        ]
+      },
+      {
+        "technique": "T1059.004",
+        "description": "Unix Shell",
+        "platforms": [
+          "linux"
+        ],
+        "sources": [
+          "auditd"
+        ]
+      },
+      {
+        "technique": "T1071",
+        "description": "Application Layer Protocol / T1041 Exfiltration Over C2 Channel",
+        "platforms": [
+          "windows"
+        ],
+        "sources": [
+          "Sysmon"
+        ]
+      },
+      {
+        "technique": "T1136.001",
+        "description": "Create Local Account",
+        "platforms": [
+          "linux",
+          "windows"
+        ],
+        "sources": [
+          "Security",
+          "auditd",
+          "auth.log"
+        ]
+      },
+      {
+        "technique": "T1547.001",
+        "description": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+        "platforms": [
+          "windows"
+        ],
+        "sources": [
+          "Sysmon"
+        ]
+      },
+      {
+        "technique": "T1548.003",
+        "description": "Sudo and Sudo Caching",
+        "platforms": [
+          "linux"
+        ],
+        "sources": [
+          "auditd"
+        ]
+      }
+    ],
+    "partially_covered": [
+      {
+        "technique": "T1098",
+        "description": "Account Manipulation",
+        "platforms": [
+          "windows"
+        ],
+        "sources": [
+          "Security"
+        ]
+      }
+    ],
+    "blind": [],
+    "covered_technique_count": 10,
+    "partial_technique_count": 1,
+    "blind_technique_count": 0
+  },
+  "known_gaps": [
+    {
+      "description": "Account Manipulation (Add 'support_update' to Administrators group)",
+      "impacted_platform": "windows",
+      "impacted_technique": "T1098",
+      "reason": "captured without the fields needed to pivot (command line, path or user missing)",
+      "recommended_instrumentation": "Audit group membership changes (Security 4728/4732) and correlate with the account-creation event"
+    },
+    {
+      "description": "Telemetry quality inputs not provided",
+      "impacted_platform": "windows, linux",
+      "impacted_technique": "n/a",
+      "reason": "windows_telemetry_quality.json / linux_telemetry_quality.json / sysmon_coverage_matrix.json are produced by the telemetry-quality tasks (not part of this lab folder)",
+      "recommended_instrumentation": "Add a detection source for this technique and re-run the coverage test"
+    }
+  ],
+  "quality_summary": {
+    "windows_score": null,
+    "linux_score": null,
+    "sysmon_coverage": null,
+    "final_handoff_confidence": "acceptable"
+  }
+}

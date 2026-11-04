@@ -1,0 +1,129 @@
+{
+  "platform": "linux",
+  "host": "billing-srv-01",
+  "generated_at": "2026-11-03T23:14:36Z",
+  "window_seconds": 30,
+  "source_coverage": [
+    "auditd",
+    "auth.log",
+    "syslog"
+  ],
+  "actions": [
+    {
+      "action_number": 1,
+      "action": "Creating user testattacker",
+      "timestamp": "2026-11-03T23:14:21Z",
+      "expected_audit_key": "identity",
+      "sources_captured": 2,
+      "status": "CAPTURED",
+      "detections": [
+        {
+          "source": "auditd",
+          "audit_key": "identity",
+          "event_count": 20,
+          "detail": "Full",
+          "key_fields": "/etc/shadow"
+        },
+        {
+          "source": "auth.log",
+          "audit_key": null,
+          "event_count": 1,
+          "detail": "Full",
+          "excerpt": "2026-11-04T00:14:21.860727+01:00 billing-srv-01 authpriv.info useradd[60414]: new group: name=testattacker, GID=1004"
+        }
+      ]
+    },
+    {
+      "action_number": 2,
+      "action": "Modifying sudoers",
+      "timestamp": "2026-11-03T23:14:21Z",
+      "expected_audit_key": "sudoers",
+      "sources_captured": 1,
+      "status": "CAPTURED",
+      "detections": [
+        {
+          "source": "auditd",
+          "audit_key": "sudoers",
+          "event_count": 3,
+          "detail": "Full",
+          "key_fields": "/etc/sudoers.d/backdoor"
+        }
+      ]
+    },
+    {
+      "action_number": 3,
+      "action": "Executing from /tmp",
+      "timestamp": "2026-11-03T23:14:22Z",
+      "expected_audit_key": "process_exec",
+      "sources_captured": 1,
+      "status": "CAPTURED",
+      "detections": [
+        {
+          "source": "auditd",
+          "audit_key": "process_exec",
+          "event_count": 265,
+          "detail": "Full",
+          "key_fields": "/lib64/ld-linux-x86-64.so.2"
+        }
+      ]
+    },
+    {
+      "action_number": 4,
+      "action": "Reverse shell attempt (localhost)",
+      "timestamp": "2026-11-03T23:14:23Z",
+      "expected_audit_key": "network_connect",
+      "sources_captured": 1,
+      "status": "CAPTURED",
+      "detections": [
+        {
+          "source": "auditd",
+          "audit_key": "network_connect",
+          "event_count": 158,
+          "detail": "Full",
+          "key_fields": "/var/run/nscd/socket"
+        }
+      ]
+    },
+    {
+      "action_number": 5,
+      "action": "Cron persistence",
+      "timestamp": "2026-11-03T23:14:23Z",
+      "expected_audit_key": "cron_persist",
+      "sources_captured": 1,
+      "status": "CAPTURED",
+      "detections": [
+        {
+          "source": "auditd",
+          "audit_key": "cron_persist",
+          "event_count": 3,
+          "detail": "Full",
+          "key_fields": "/etc/cron.d/persistence_test"
+        }
+      ]
+    },
+    {
+      "action_number": 6,
+      "action": "Accessing /etc/shadow",
+      "timestamp": "2026-11-03T23:14:23Z",
+      "expected_audit_key": "identity",
+      "sources_captured": 1,
+      "status": "CAPTURED",
+      "detections": [
+        {
+          "source": "auditd",
+          "audit_key": "identity",
+          "event_count": 20,
+          "detail": "Full",
+          "key_fields": "/etc/shadow"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_actions": 6,
+    "captured": 6,
+    "missed": 0,
+    "coverage_percent": 100,
+    "multi_source": 1
+  }
+}
