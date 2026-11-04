@@ -1,0 +1,75 @@
+﻿{
+    "generated":  "2026-11-03T22:59:12Z",
+    "hostname":  "DC01",
+    "actions":  [
+                    {
+                        "action_number":  1,
+                        "description":  "Create local user \u0027support_update\u0027",
+                        "timestamp":  "2026-11-03T22:59:03Z",
+                        "expected_detection":  [
+                                                   "Security EID 4720"
+                                               ],
+                        "mitre_technique":  "T1136.001 Create Account: Local Account",
+                        "entity":  "support_update"
+                    },
+                    {
+                        "action_number":  2,
+                        "description":  "Add \u0027support_update\u0027 to Administrators group",
+                        "timestamp":  "2026-11-03T22:59:04Z",
+                        "expected_detection":  [
+                                                   "Security EID 4732"
+                                               ],
+                        "mitre_technique":  "T1098 Account Manipulation",
+                        "entity":  "support_update"
+                    },
+                    {
+                        "action_number":  3,
+                        "description":  "Run encoded PowerShell command (harmless payload)",
+                        "timestamp":  "2026-11-03T22:59:08Z",
+                        "expected_detection":  [
+                                                   "PowerShell EID 4104",
+                                                   "Sysmon EID 1"
+                                               ],
+                        "mitre_technique":  "T1059.001 PowerShell / T1027 Obfuscated Files or Information",
+                        "entity":  "VwByAGkAdABlAC0ASABvAHMAdAAgACIAQwAyACAAYgBlAGEAYwBvAG4AIgA="
+                    },
+                    {
+                        "action_number":  4,
+                        "description":  "Create scheduled task \u0027MedDefenseSimPersistence\u0027 for persistence",
+                        "timestamp":  "2026-11-03T22:59:08Z",
+                        "expected_detection":  [
+                                                   "Sysmon EID 1"
+                                               ],
+                        "mitre_technique":  "T1053.005 Scheduled Task/Job: Scheduled Task",
+                        "entity":  "MedDefenseSimPersistence"
+                    },
+                    {
+                        "action_number":  5,
+                        "description":  "Initiate outbound network connection to 8.8.8.8",
+                        "timestamp":  "2026-11-03T22:59:09Z",
+                        "expected_detection":  [
+                                                   "Sysmon EID 3"
+                                               ],
+                        "mitre_technique":  "T1071 Application Layer Protocol / T1041 Exfiltration Over C2 Channel",
+                        "entity":  "8.8.8.8"
+                    },
+                    {
+                        "action_number":  6,
+                        "description":  "Drop file in Startup folder for persistence",
+                        "timestamp":  "2026-11-03T22:59:12Z",
+                        "expected_detection":  [
+                                                   "Sysmon EID 11"
+                                               ],
+                        "mitre_technique":  "T1547.001 Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+                        "entity":  "meddefense_sim_payload.txt"
+                    }
+                ],
+    "cleanup":  {
+                    "fully_cleaned":  true,
+                    "items_removed":  [
+                                          "user",
+                                          "task",
+                                          "file"
+                                      ]
+                }
+}
