@@ -103,8 +103,8 @@ echo "[*] Searching telemetry..."
 printf '%-33s %-14s %-16s %-9s %s\n' "Action" "Source" "Key" "Detail" "Status"
 printf '%-33s %-14s %-16s %-9s %s\n' "------" "------" "---" "------" "------"
 
-RESULTS="$TMP/results.jsonl"
-: > "$RESULTS"
+TMP_JSN="$TMP/TMP_JSN.jsonl"
+: > "$TMP_JSN"
 CAPTURED=0
 MULTI=0
 
@@ -189,7 +189,7 @@ for i in $(seq 0 $((ACTION_COUNT - 1))); do
 		--argjson dets "$(jq -s . "$DETECTIONS")" --argjson sources "$ACT_SOURCES" --argjson missed "$MISSED_FLAG" \
 		'{action_number: $n, action: $name, timestamp: $ts, expected_audit_key: $key,
 		  sources_captured: $sources, status: (if $missed == 1 then "MISSED" else "CAPTURED" end),
-		  detections: $dets}' >> "$RESULTS"
+		  detections: $dets}' >> "$TMP_JSN"
 done
 
 MISSED=$((ACTION_COUNT - CAPTURED))
@@ -204,7 +204,7 @@ jq -s --arg host "$(hostname)" --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
 	 source_coverage: (["auditd", "auth.log", "syslog"]),
 	 actions: .,
 	 summary: {total_actions: $total, captured: $captured, missed: $missed,
-	           coverage_percent: $pct, multi_source: $multi}}' "$RESULTS" > "$OUT" \
+	           coverage_percent: $pct, multi_source: $multi}}' "$TMP_JSN" > "$OUT" \
 	|| { echo "Error: cannot write $OUT" >&2; exit 1; }
 
 echo "Actions: $ACTION_COUNT | Captured: $CAPTURED/$ACTION_COUNT ($PCT%) | Multi-source: $MULTI"
