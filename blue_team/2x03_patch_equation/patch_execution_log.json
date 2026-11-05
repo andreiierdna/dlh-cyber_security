@@ -1,0 +1,197 @@
+{
+  "started_at": "2026-11-05T12:39:31+01:00",
+  "finished_at": "2026-11-05T12:40:07+01:00",
+  "hostname": "billing-srv-01",
+  "plan_source_hash": "ad581e7a7f377f2e1f5a55ff82c392d965d9a6ac4ebc9a58694d24c59c1cb375",
+  "entries": [
+    {
+      "package": "apt",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 9,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "2.4.13",
+        "services": []
+      },
+      "post": {
+        "installed_version": "2.4.15ubuntu0.1",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Setting up apt (2.4.15ubuntu0.1) ...\r\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 119147 files and directories currently installed.)\r\nPreparing to unpack .../apt-utils_2.4.15ubuntu0.1_amd64.deb ...\r\nUnpacking apt-utils (2.4.15ubuntu0.1) over (2.4.13) ...\r\nSetting up apt-utils (2.4.15ubuntu0.1) ...\r\nProcessing triggers for man-db (2.10.2-1) ...\r\nProcessing triggers for libc-bin (2.35-0ubuntu3.15) ...\r\n\nRunning kernel seems to be up-to-date.\n\nServices to be restarted:\n\nService restarts being deferred:\n systemctl restart unattended-upgrades.service\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "apt-transport-https",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 4,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "2.4.14",
+        "services": []
+      },
+      "post": {
+        "installed_version": "2.4.15ubuntu0.1",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "After this operation, 0 B of additional disk space will be used.\nGet:1 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 apt-transport-https all 2.4.15ubuntu0.1 [163 kB]\nFetched 163 kB in 0s (879 kB/s)\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 119190 files and directories currently installed.)\r\nPreparing to unpack .../apt-transport-https_2.4.15ubuntu0.1_all.deb ...\r\nUnpacking apt-transport-https (2.4.15ubuntu0.1) over (2.4.14) ...\r\nSetting up apt-transport-https (2.4.15ubuntu0.1) ...\r\n\nRunning kernel seems to be up-to-date.\n\nServices to be restarted:\n\nService restarts being deferred:\n systemctl restart unattended-upgrades.service\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "apt-utils",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 0,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "2.4.15ubuntu0.1",
+        "services": []
+      },
+      "post": {
+        "installed_version": "2.4.15ubuntu0.1",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Reading package lists...\nBuilding dependency tree...\nReading state information...\napt-utils is already the newest version (2.4.15ubuntu0.1).\n0 upgraded, 0 newly installed, 0 to remove and 75 not upgraded.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "libapt-pkg6.0",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 0,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "2.4.15ubuntu0.1",
+        "services": []
+      },
+      "post": {
+        "installed_version": "2.4.15ubuntu0.1",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nlibapt-pkg6.0 is already the newest version (2.4.15ubuntu0.1).\n0 upgraded, 0 newly installed, 0 to remove and 75 not upgraded.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "libsnmp-base",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 5,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.9",
+        "services": []
+      },
+      "post": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.10",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsnmp-base all 5.9.1+dfsg-1ubuntu2.10 [200 kB]\nFetched 200 kB in 0s (1891 kB/s)\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 119190 files and directories currently installed.)\r\nPreparing to unpack .../libsnmp-base_5.9.1+dfsg-1ubuntu2.10_all.deb ...\r\nUnpacking libsnmp-base (5.9.1+dfsg-1ubuntu2.10) over (5.9.1+dfsg-1ubuntu2.9) ...\r\nSetting up libsnmp-base (5.9.1+dfsg-1ubuntu2.10) ...\r\nProcessing triggers for man-db (2.10.2-1) ...\r\n\nRunning kernel seems to be up-to-date.\n\nServices to be restarted:\n\nService restarts being deferred:\n systemctl restart unattended-upgrades.service\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "libsnmp40",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 6,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.9",
+        "services": []
+      },
+      "post": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.10",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Unpacking libsnmp40:amd64 (5.9.1+dfsg-1ubuntu2.10) over (5.9.1+dfsg-1ubuntu2.9) ...\r\nSetting up libsnmp40:amd64 (5.9.1+dfsg-1ubuntu2.10) ...\r\nSetting up snmp (5.9.1+dfsg-1ubuntu2.10) ...\r\nSetting up snmpd (5.9.1+dfsg-1ubuntu2.10) ...\r\nsnmpd.service is a disabled or a static unit not running, not starting it.\r\nProcessing triggers for libc-bin (2.35-0ubuntu3.15) ...\r\nProcessing triggers for man-db (2.10.2-1) ...\r\n\nRunning kernel seems to be up-to-date.\n\nServices to be restarted:\n\nService restarts being deferred:\n systemctl restart unattended-upgrades.service\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.",
+      "stderr_tail": "Can't exec \"/tmp/snmpd.config.y0Rx4o\": Permission denied at /usr/lib/x86_64-linux-gnu/perl-base/IPC/Open3.pm line 178.\nopen2: exec of /tmp/snmpd.config.y0Rx4o configure 5.9.1+dfsg-1ubuntu2.9 failed: Permission denied at /usr/share/perl5/Debconf/ConfModule.pm line 59."
+    },
+    {
+      "package": "python3-twisted",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 8,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "22.1.0-2ubuntu2.7",
+        "services": []
+      },
+      "post": {
+        "installed_version": "22.1.0-2ubuntu2.8",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-twisted all 22.1.0-2ubuntu2.8 [2008 kB]\nFetched 2008 kB in 0s (12.7 MB/s)\n(Reading database ... \r(Reading database ... 5%\r(Reading database ... 10%\r(Reading database ... 15%\r(Reading database ... 20%\r(Reading database ... 25%\r(Reading database ... 30%\r(Reading database ... 35%\r(Reading database ... 40%\r(Reading database ... 45%\r(Reading database ... 50%\r(Reading database ... 55%\r(Reading database ... 60%\r(Reading database ... 65%\r(Reading database ... 70%\r(Reading database ... 75%\r(Reading database ... 80%\r(Reading database ... 85%\r(Reading database ... 90%\r(Reading database ... 95%\r(Reading database ... 100%\r(Reading database ... 119190 files and directories currently installed.)\r\nPreparing to unpack .../python3-twisted_22.1.0-2ubuntu2.8_all.deb ...\r\nUnpacking python3-twisted (22.1.0-2ubuntu2.8) over (22.1.0-2ubuntu2.7) ...\r\nSetting up python3-twisted (22.1.0-2ubuntu2.8) ...\r\nProcessing triggers for man-db (2.10.2-1) ...\r\n\nRunning kernel seems to be up-to-date.\n\nServices to be restarted:\n\nService restarts being deferred:\n systemctl restart unattended-upgrades.service\n\nNo containers need to be restarted.\n\nNo user sessions are running outdated binaries.\n\nNo VM guests are running outdated hypervisor (qemu) binaries on this host.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "snmp",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 1,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.10",
+        "services": []
+      },
+      "post": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.10",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nsnmp is already the newest version (5.9.1+dfsg-1ubuntu2.10).\n0 upgraded, 0 newly installed, 0 to remove and 70 not upgraded.",
+      "stderr_tail": ""
+    },
+    {
+      "package": "snmpd",
+      "bucket": "scheduled",
+      "status": "success",
+      "reason": null,
+      "apt_exit_code": 0,
+      "duration_seconds": 0,
+      "requires_restart": false,
+      "requires_reboot": false,
+      "pre": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.10",
+        "services": []
+      },
+      "post": {
+        "installed_version": "5.9.1+dfsg-1ubuntu2.10",
+        "services": []
+      },
+      "restarts": [],
+      "stdout_tail": "Reading package lists...\nBuilding dependency tree...\nReading state information...\nsnmpd is already the newest version (5.9.1+dfsg-1ubuntu2.10).\n0 upgraded, 0 newly installed, 0 to remove and 70 not upgraded.",
+      "stderr_tail": ""
+    }
+  ]
+}
