@@ -1,0 +1,193 @@
+{
+  "generated_at": "2026-11-05T12:39:26+01:00",
+  "hostname": "billing-srv-01",
+  "weights": {
+    "cvss": 1,
+    "kev": 2,
+    "criticality": 0.5,
+    "exposure": 0.3,
+    "emergency_threshold": 7,
+    "urgent_threshold": 4
+  },
+  "plan": [
+    {
+      "package": "apt",
+      "installed_version": "2.4.13",
+      "candidate_version": "2.4.15ubuntu0.1",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-109518"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "2.4.13",
+      "rank": 1
+    },
+    {
+      "package": "apt-transport-https",
+      "installed_version": "2.4.14",
+      "candidate_version": "2.4.15ubuntu0.1",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-109518"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "2.4.14",
+      "rank": 2
+    },
+    {
+      "package": "apt-utils",
+      "installed_version": "2.4.13",
+      "candidate_version": "2.4.15ubuntu0.1",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-109518"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "2.4.13",
+      "rank": 3
+    },
+    {
+      "package": "libapt-pkg6.0",
+      "installed_version": "2.4.13",
+      "candidate_version": "2.4.15ubuntu0.1",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-109518"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "2.4.13",
+      "rank": 4
+    },
+    {
+      "package": "libsnmp-base",
+      "installed_version": "5.9.1+dfsg-1ubuntu2.9",
+      "candidate_version": "5.9.1+dfsg-1ubuntu2.10",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-89147"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "5.9.1+dfsg-1ubuntu2.9",
+      "rank": 5
+    },
+    {
+      "package": "libsnmp40",
+      "installed_version": "5.9.1+dfsg-1ubuntu2.9",
+      "candidate_version": "5.9.1+dfsg-1ubuntu2.10",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-89147"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "5.9.1+dfsg-1ubuntu2.9",
+      "rank": 6
+    },
+    {
+      "package": "python3-twisted",
+      "installed_version": "22.1.0-2ubuntu2.7",
+      "candidate_version": "22.1.0-2ubuntu2.8",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-106454"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "22.1.0-2ubuntu2.7",
+      "rank": 7
+    },
+    {
+      "package": "snmp",
+      "installed_version": "5.9.1+dfsg-1ubuntu2.9",
+      "candidate_version": "5.9.1+dfsg-1ubuntu2.10",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-89147"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "5.9.1+dfsg-1ubuntu2.9",
+      "rank": 8
+    },
+    {
+      "package": "snmpd",
+      "installed_version": "5.9.1+dfsg-1ubuntu2.9",
+      "candidate_version": "5.9.1+dfsg-1ubuntu2.10",
+      "source_pocket": "security",
+      "cves": [
+        "CVE-2026-89147"
+      ],
+      "max_cvss": null,
+      "severity": "unrated",
+      "in_cisa_kev": false,
+      "score": 1.4,
+      "bucket": "scheduled",
+      "affected_services": [],
+      "requires_restart": false,
+      "requires_reboot": false,
+      "rollback_target_version": "5.9.1+dfsg-1ubuntu2.9",
+      "rank": 9
+    }
+  ],
+  "summary": {
+    "total": 9,
+    "emergency": 0,
+    "urgent": 0,
+    "scheduled": 9,
+    "reboot_required": false,
+    "kev_entries": 0
+  }
+}
