@@ -4,7 +4,7 @@
 # Purpose: Build vulnerability_inventory.json - every installed package with a
 #          pending security update, its CVEs, CVSS score, severity and CISA KEV
 #          status. Measurement step for the whole patch pipeline.
-# Author:  MedDefense blue team (Holberton 2x03 - Task 0)
+# Author:  Andrei
 # =============================================================================
 # MedDefense 2x03 "The Patch Equation" - Task 0
 # Answers Dr. Morales' first question: which of our systems are exposed.
