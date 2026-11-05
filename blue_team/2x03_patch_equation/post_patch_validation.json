@@ -1,0 +1,449 @@
+{
+  "generated_at": "2026-11-05T12:40:38+01:00",
+  "hostname": "billing-srv-01",
+  "total_checks": 56,
+  "passed": 56,
+  "failed": 0,
+  "summary": {
+    "service_checks": 45,
+    "socket_checks": 8,
+    "probe_checks": 3
+  },
+  "verdict": "PASS",
+  "details": [
+    {
+      "type": "probe",
+      "target": "apache2.service",
+      "probe": "curl -fsS -o /dev/null --max-time 5 http://127.0.0.1/",
+      "status": "pass"
+    },
+    {
+      "type": "probe",
+      "target": "mysql.service",
+      "probe": "mysqladmin --connect-timeout=5 ping",
+      "status": "pass"
+    },
+    {
+      "type": "probe",
+      "target": "ssh.service",
+      "probe": "bash -c 'exec 3<>/dev/tcp/127.0.0.1/22; IFS= read -r l <&3; case \"$l\" in SSH-*) exit 0;; *) exit 1;; esac'",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "apache2.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "apparmor.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "auditd.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "blk-availability.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "console-setup.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "cron.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "dbus.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "finalrd.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "getty@tty1.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "irqbalance.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "keyboard-setup.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "kmod-static-nodes.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "lvm2-monitor.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "lvm2-pvscan@8:3.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "mysql.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "networkd-dispatcher.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "plymouth-quit-wait.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "plymouth-quit.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "plymouth-read-write.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "rsyslog.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "setvtrgb.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "ssh.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-binfmt.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-fsck@dev-disk-by\\x2duuid-907d4524\\x2dc1c7\\x2d4387\\x2da530\\x2d8bfda4b27e0d.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-journal-flush.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-journald.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-logind.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-modules-load.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-networkd.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-random-seed.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-remount-fs.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-resolved.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-sysctl.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-sysusers.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-timesyncd.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-tmpfiles-setup-dev.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-tmpfiles-setup.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-udev-trigger.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-udevd.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-update-utmp.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "systemd-user-sessions.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "ufw.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "unattended-upgrades.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "user-runtime-dir@1000.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "exited",
+      "status": "pass"
+    },
+    {
+      "type": "service",
+      "target": "user@1000.service",
+      "expected": "active",
+      "actual": "active",
+      "sub_state": "running",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "tcp/*:80",
+      "expected": "listening",
+      "actual": "*:80",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "tcp/0.0.0.0:22",
+      "expected": "listening",
+      "actual": "0.0.0.0:22",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "tcp/0.0.0.0:3306",
+      "expected": "listening",
+      "actual": "0.0.0.0:3306",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "tcp/127.0.0.1:33060",
+      "expected": "listening",
+      "actual": "127.0.0.1:33060",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "tcp/127.0.0.53%lo:53",
+      "expected": "listening",
+      "actual": "127.0.0.53%lo:53",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "tcp/[::]:22",
+      "expected": "listening",
+      "actual": "0.0.0.0:22",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "udp/10.0.2.15%enp0s3:68",
+      "expected": "listening",
+      "actual": "10.0.2.15%enp0s3:68",
+      "status": "pass"
+    },
+    {
+      "type": "socket",
+      "target": "udp/127.0.0.53%lo:53",
+      "expected": "listening",
+      "actual": "127.0.0.53%lo:53",
+      "status": "pass"
+    }
+  ]
+}

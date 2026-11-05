@@ -1,0 +1,31 @@
+{
+  "_comment": "CVE feed snapshot for the exercise. CVSS = NVD CVSS v3.1 base score; in_cisa_kev = listed in the CISA Known Exploited Vulnerabilities catalog. CVEs missing from this file are reported as 'unrated' rather than failing the run.",
+  "generated_at": "2026-11-05T08:00:00Z",
+  "advisory": "CISA advisory - three critical CVEs affecting the MedDefense Linux fleet",
+  "cves": {
+    "CVE-2024-1086": {
+      "cvss": 7.8,
+      "in_cisa_kev": true,
+      "title": "Linux kernel nf_tables use-after-free - local privilege escalation to root",
+      "published": "2024-01-31"
+    },
+    "CVE-2024-6387": {
+      "cvss": 8.1,
+      "in_cisa_kev": true,
+      "title": "OpenSSH server signal-handler race (regreSSHion) - unauthenticated remote code execution",
+      "published": "2024-07-01"
+    },
+    "CVE-2024-0727": {
+      "cvss": 5.5,
+      "in_cisa_kev": false,
+      "title": "OpenSSL PKCS12 NULL pointer dereference - denial of service",
+      "published": "2024-01-26"
+    }
+  },
+  "packages": {
+    "linux-image-generic": ["CVE-2024-1086"],
+    "linux-image-virtual": ["CVE-2024-1086"],
+    "openssh-server": ["CVE-2024-6387"],
+    "libssl3": ["CVE-2024-0727"]
+  }
+}

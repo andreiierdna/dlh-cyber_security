@@ -1,0 +1,17 @@
+{
+  "_comment": "Liveness probes for services marked 'critical'. Each command must exit 0 when the service is healthy; it is run with a timeout by 5-post_patch_validate.sh.",
+  "probes": {
+    "apache2.service": {
+      "type": "http",
+      "command": "curl -fsS -o /dev/null --max-time 5 http://127.0.0.1/"
+    },
+    "mysql.service": {
+      "type": "tcp-auth",
+      "command": "mysqladmin --connect-timeout=5 ping"
+    },
+    "ssh.service": {
+      "type": "banner",
+      "command": "bash -c 'exec 3<>/dev/tcp/127.0.0.1/22; IFS= read -r l <&3; case \"$l\" in SSH-*) exit 0;; *) exit 1;; esac'"
+    }
+  }
+}

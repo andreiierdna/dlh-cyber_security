@@ -1,0 +1,18 @@
+{
+  "_comment": "Criticality labels for the MedDefense billing server. Services not listed default to 'low' in 1-service_deps.sh.",
+  "services": {
+    "ssh.service": "critical",
+    "apache2.service": "critical",
+    "mysql.service": "critical",
+    "auditd.service": "high",
+    "rsyslog.service": "high",
+    "cron.service": "high",
+    "ufw.service": "high",
+    "apparmor.service": "medium",
+    "systemd-networkd.service": "medium",
+    "systemd-resolved.service": "medium",
+    "polkit.service": "medium",
+    "packagekit.service": "medium",
+    "dbus.service": "medium"
+  }
+}
