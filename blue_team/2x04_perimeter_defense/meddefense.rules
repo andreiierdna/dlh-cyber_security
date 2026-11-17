@@ -1,0 +1,37 @@
+# =============================================================================
+# MedDefense custom Suricata rules - Task 10 (2x04 Perimeter Defense)
+# sids 9000001-9000006, rev 1. Each rule encodes an organizational boundary that
+# the community ruleset cannot know about.
+#
+# Zone plan (segmentation_rules.json, task 2):
+#   INTERNAL 10.10.0.0/16 (servers 10.10.1.0/24, clinical 10.10.2.0/24)
+#   MEDDEV   10.10.4.0/24 (+ legacy 172.16.40.0/24)
+#   DMZ      172.16.10.0/24 (+ guest 10.10.5.0/24)
+#   MGMT     172.16.30.0/24
+# $HOME_NET is defined in suricata.yaml as 10.10.0.0/16 + 172.16.0.0/16.
+#
+# NTP exception: medical devices may use udp/123, so the MEDDEV egress rule
+# excludes it; every other protocol/port leaving the device VLAN fires.
+# =============================================================================
+
+# 9000001 - Medical device VLAN talking to the Internet (NTP excepted)
+alert ip 10.10.4.0/24 any -> !$HOME_NET !123 (msg:"MEDDEFENSE MEDDEV to Internet"; flow:stateless; classtype:policy-violation; sid:9000001; rev:1;)
+
+# 9000002 - SMB from the guest network into the server VLAN (lateral movement)
+alert tcp 10.10.5.0/24 any -> $HOME_NET 445 (msg:"MEDDEFENSE Unauthorized SMB From Guest To Server Zone"; flow:to_server,established; classtype:policy-violation; sid:9000002; rev:1;)
+
+# 9000003 - >50 MB of TCP payload from a server to one external host in 300 s
+# Suricata 6 has no byte-volume keyword, so the threshold is expressed in
+# segments: dsize:>1300 (~1400 B MSS) x 38000 ~= 52 MB, tracked per source.
+alert tcp 10.10.1.0/24 any -> !$HOME_NET any (msg:"MEDDEFENSE Large Outbound From Server"; flow:to_server,established; dsize:>1300; threshold: type both, track by_src, count 38000, seconds 300; classtype:policy-violation; sid:9000003; rev:1;)
+
+# 9000004 - DNS tunneling: leftmost label longer than 50 characters
+alert dns any any -> any any (msg:"MEDDEFENSE DNS Tunneling Long Label"; dns.query; pcre:"/^[^.]{51,}\./"; classtype:policy-violation; sid:9000004; rev:1;)
+
+# 9000005 - Database traffic to any host other than the authorized billing DB
+# (the capture shows servers 10.10.1.x opening 3306 to 10.10.2.x - direction
+# reversed from the clinic, but the same boundary is violated)
+alert tcp $HOME_NET any -> !10.10.1.10 3306 (msg:"MEDDEFENSE Clinical To Unauthorized Database"; flow:to_server; classtype:policy-violation; sid:9000005; rev:1;)
+
+# 9000006 - Cleartext Telnet to any medical device
+alert tcp any any -> 10.10.4.0/24 23 (msg:"MEDDEFENSE Telnet To MEDDEV Device"; flow:to_server,established; classtype:policy-violation; sid:9000006; rev:1;)
