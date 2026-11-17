@@ -1,0 +1,866 @@
+{
+  "generated_at": "2026-11-17T19:10:31+01:00",
+  "hostname": "billing-srv-01",
+  "pcap": "/home/analyst/MedDefense_Lab/PCAPs/suspicious_session.pcap",
+  "duration_seconds": 486,
+  "packets": 942,
+  "conversations": {
+    "tcp": [
+      {
+        "endpoint_a": "10.10.1.10:55555",
+        "endpoint_b": "185.220.101.42:8080",
+        "frames": 4,
+        "bytes": 383,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50000",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50001",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50002",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50003",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50004",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50005",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50006",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50007",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:50008",
+        "endpoint_b": "185.220.101.42:443",
+        "frames": 4,
+        "bytes": 285,
+        "proto": "tcp"
+      }
+    ],
+    "udp": [
+      {
+        "endpoint_a": "10.10.1.10:40004",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40009",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40014",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40019",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40024",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40029",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40034",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40039",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 128,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40001",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 124,
+        "proto": "udp"
+      },
+      {
+        "endpoint_a": "10.10.1.10:40006",
+        "endpoint_b": "8.8.8.8:53",
+        "frames": 1,
+        "bytes": 124,
+        "proto": "udp"
+      }
+    ]
+  },
+  "dns_queries": [
+    {
+      "time_epoch": 1755100000,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100012,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100024,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100036,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100048,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100060,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100072,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100084,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100096,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100108,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100120,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100132,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100144,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100156,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100168,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100180,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100192,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100204,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100216,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100228,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100240,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100252,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100264,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100276,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100288,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100300,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100312,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100324,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100336,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100348,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100360,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100372,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100384,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100396,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100408,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100420,
+      "src_ip": "10.10.1.10",
+      "query": "ntp.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100432,
+      "src_ip": "10.10.1.10",
+      "query": "billing.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100444,
+      "src_ip": "10.10.1.10",
+      "query": "updates.microsoft.com",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100456,
+      "src_ip": "10.10.1.10",
+      "query": "pool.ntp.org",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100468,
+      "src_ip": "10.10.1.10",
+      "query": "clamav-db.meddefense.local",
+      "qtype": "1"
+    },
+    {
+      "time_epoch": 1755100483,
+      "src_ip": "10.10.1.10",
+      "query": "ZG9jdW1lbnQuZXhlLm1kZC5jcmltc29uLXRpZGUtb3BzLnh5eg.c2.example",
+      "qtype": "16"
+    },
+    {
+      "time_epoch": 1755100486,
+      "src_ip": "10.10.1.10",
+      "query": "cGF0aWVudF9leHBvcnRfYmF0Y2hfMDA0Mi5jc3YuZ3oubWRkLmNyaW1zb24tdGl.c2.example",
+      "qtype": "16"
+    }
+  ],
+  "http_requests": [
+    {
+      "time_epoch": 1755100480.09,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "host": "cdn.crimson-tide-ops.xyz",
+      "method": "GET",
+      "uri": "/update.bin"
+    }
+  ],
+  "tls_sni": [
+    {
+      "time_epoch": 1755100000.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100008.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100016.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100024.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100032.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100040.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100048.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100056.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100064.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100072.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100080.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100088.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100096.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100104.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100112.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100120.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100128.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100136.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100144.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100152.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100160.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100168.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100176.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100184.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100192.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100200.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100208.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100216.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100224.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100232.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100240.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100248.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100256.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100264.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100272.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100280.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100288.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100296.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100304.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100312.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100320.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100328.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100336.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100344.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100352.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100360.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100368.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100376.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100384.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100392.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100400.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100408.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100416.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100424.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100432.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100440.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100448.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100456.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100464.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    },
+    {
+      "time_epoch": 1755100472.06,
+      "src_ip": "10.10.1.10",
+      "dst_ip": "185.220.101.42",
+      "sni": "cdn.crimson-tide-ops.xyz"
+    }
+  ],
+  "file_transfers": [
+    {
+      "time_epoch": 1755100480.15,
+      "src_ip": "185.220.101.42",
+      "dst_ip": "10.10.1.10",
+      "http_content_type": "application/octet-stream",
+      "smb_filename": null,
+      "has_file_data": false
+    }
+  ],
+  "protocol_distribution": [
+    {
+      "protocol": "eth",
+      "frames": 942,
+      "bytes": 65098,
+      "share_pct": 100
+    },
+    {
+      "protocol": "ip",
+      "frames": 942,
+      "bytes": 65098,
+      "share_pct": 100
+    },
+    {
+      "protocol": "tcp",
+      "frames": 860,
+      "bytes": 56931,
+      "share_pct": 91.3
+    },
+    {
+      "protocol": "tls",
+      "frames": 120,
+      "bytes": 16320,
+      "share_pct": 12.7
+    },
+    {
+      "protocol": "mysql",
+      "frames": 25,
+      "bytes": 1475,
+      "share_pct": 2.7
+    },
+    {
+      "protocol": "_ws.malformed",
+      "frames": 25,
+      "bytes": 1475,
+      "share_pct": 2.7
+    },
+    {
+      "protocol": "http",
+      "frames": 2,
+      "bytes": 409,
+      "share_pct": 0.2
+    },
+    {
+      "protocol": "data",
+      "frames": 1,
+      "bytes": 221,
+      "share_pct": 0.1
+    },
+    {
+      "protocol": "udp",
+      "frames": 82,
+      "bytes": 8167,
+      "share_pct": 8.7
+    },
+    {
+      "protocol": "dns",
+      "frames": 82,
+      "bytes": 8167,
+      "share_pct": 8.7
+    }
+  ],
+  "long_dns_labels": [
+    {
+      "label": "cGF0aWVudF9leHBvcnRfYmF0Y2hfMDA0Mi5jc3YuZ3oubWRkLmNyaW1zb24tdGl",
+      "length": 63
+    }
+  ],
+  "summary": {
+    "tcp_conversations": 10,
+    "udp_conversations": 10,
+    "dns_queries": 42,
+    "http_requests": 1,
+    "tls_sni": 60,
+    "file_transfers": 1,
+    "long_dns_labels": 1
+  }
+}
