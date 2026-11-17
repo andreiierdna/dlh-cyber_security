@@ -1,0 +1,227 @@
+{
+  "zones": [
+    {
+      "name": "DMZ",
+      "cidr": "172.16.10.0/24",
+      "cidrs": [
+        "172.16.10.0/24",
+        "10.10.5.0/24"
+      ],
+      "purpose": "Public-facing and guest-facing services (portal, guest Wi-Fi edge)",
+      "default_inbound": "drop",
+      "default_outbound": "accept"
+    },
+    {
+      "name": "INTERNAL",
+      "cidr": "10.10.0.0/16",
+      "cidrs": [
+        "10.10.0.0/16",
+        "172.16.20.0/24"
+      ],
+      "purpose": "Clinical applications, workstations and server hosts",
+      "default_inbound": "drop",
+      "default_outbound": "accept"
+    },
+    {
+      "name": "MGMT",
+      "cidr": "172.16.30.0/24",
+      "cidrs": [
+        "172.16.30.0/24"
+      ],
+      "purpose": "Administration workstations, jump host and DNS resolver",
+      "default_inbound": "drop",
+      "default_outbound": "accept"
+    },
+    {
+      "name": "MEDDEV",
+      "cidr": "10.10.4.0/24",
+      "cidrs": [
+        "10.10.4.0/24",
+        "172.16.40.0/24"
+      ],
+      "purpose": "Medical device / imaging VLAN (monitors, pumps, PACS, lab PCs)",
+      "default_inbound": "drop",
+      "default_outbound": "accept-with-restrictions"
+    }
+  ],
+  "flows": [
+    {
+      "src_zone": "MGMT",
+      "dst_zone": "INTERNAL",
+      "proto": "tcp",
+      "dport": 22,
+      "justification": "Administrative SSH to internal hosts",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "MGMT",
+      "dst_zone": "DMZ",
+      "proto": "tcp",
+      "dport": 22,
+      "justification": "Administrative SSH to DMZ hosts",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "INTERNAL",
+      "dst_zone": "INTERNAL",
+      "proto": "tcp",
+      "dport": 443,
+      "justification": "Clinical workstation to application server (HTTPS)",
+      "exception_for": "clinical_workstation->server_host",
+      "action": "allow"
+    },
+    {
+      "src_zone": "INTERNAL",
+      "dst_zone": "INTERNAL",
+      "proto": "tcp",
+      "dport": 3306,
+      "justification": "Clinical application to authorized billing database",
+      "exception_for": "clinical_workstation->authorized_database",
+      "action": "allow"
+    },
+    {
+      "src_zone": "DMZ",
+      "dst_zone": "INTERNAL",
+      "proto": "tcp",
+      "dport": 3306,
+      "justification": "Named DMZ application hosts only, to the internal database",
+      "exception_for": "named_dmz_application_host->database",
+      "action": "allow"
+    },
+    {
+      "src_zone": "MEDDEV",
+      "dst_zone": "INTERNAL",
+      "proto": "tcp",
+      "dport": 4242,
+      "justification": "DICOM imaging to PACS",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "MEDDEV",
+      "dst_zone": "INTERNAL",
+      "proto": "tcp",
+      "dport": 443,
+      "justification": "EHR web integration for device display",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "ALL",
+      "dst_zone": "MGMT",
+      "proto": "udp",
+      "dport": 53,
+      "justification": "DNS resolution through the management resolver",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "ALL",
+      "dst_zone": "MGMT",
+      "proto": "tcp",
+      "dport": 53,
+      "justification": "DNS fallback through the management resolver",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "MGMT",
+      "dst_zone": "MEDDEV",
+      "proto": "tcp",
+      "dport": 22,
+      "justification": "The only inbound administration path allowed into MEDDEV",
+      "exception_for": null,
+      "action": "allow"
+    },
+    {
+      "src_zone": "MGMT",
+      "dst_zone": "MEDDEV",
+      "proto": "tcp",
+      "dport": 4242,
+      "justification": "DICOM maintenance access for imaging support",
+      "exception_for": null,
+      "action": "allow"
+    }
+  ],
+  "deny_all": [
+    {
+      "src_zone": "MEDDEV",
+      "dst_zone": "DMZ",
+      "proto": "any",
+      "dport": "any",
+      "justification": "No medical device traffic to the public-facing zone",
+      "exception_for": null,
+      "action": "deny_all"
+    },
+    {
+      "src_zone": "MEDDEV",
+      "dst_zone": "EXTERNAL",
+      "proto": "any",
+      "dport": "any",
+      "justification": "No medical device traffic to the Internet (except udp/123 NTP)",
+      "exception_for": null,
+      "action": "deny_all"
+    },
+    {
+      "src_zone": "DMZ",
+      "dst_zone": "MEDDEV",
+      "proto": "any",
+      "dport": "any",
+      "justification": "DMZ hosts must not initiate sessions to medical devices",
+      "exception_for": null,
+      "action": "deny_all"
+    },
+    {
+      "src_zone": "INTERNAL",
+      "dst_zone": "MEDDEV",
+      "proto": "any",
+      "dport": "any",
+      "justification": "Only MGMT may administer medical devices",
+      "exception_for": null,
+      "action": "deny_all"
+    },
+    {
+      "src_zone": "DMZ",
+      "dst_zone": "MGMT",
+      "proto": "any",
+      "dport": "any",
+      "justification": "DMZ hosts must not reach management systems",
+      "exception_for": null,
+      "action": "deny_all"
+    },
+    {
+      "src_zone": "MGMT",
+      "dst_zone": "EXTERNAL",
+      "proto": "any",
+      "dport": "any",
+      "justification": "Management egress restricted to approved update hosts",
+      "exception_for": null,
+      "action": "deny_all"
+    },
+    {
+      "src_zone": "INTERNAL",
+      "dst_zone": "EXTERNAL",
+      "proto": "any",
+      "dport": "any",
+      "justification": "General internal egress denied except approved proxies",
+      "exception_for": null,
+      "action": "deny_all"
+    }
+  ],
+  "policy_notes": [
+    "MEDDEV outbound is allow-with-restrictions: only udp/123 (NTP) to the management resolver and no Internet destinations",
+    "INTERNAL->INTERNAL 3306 is limited to the authorized billing database host (10.10.1.10)",
+    "DMZ->INTERNAL 3306 is limited to named DMZ application hosts (exception_for tag)"
+  ],
+  "generated_at": "2026-11-17T19:03:19+01:00",
+  "summary": {
+    "zone_count": 4,
+    "flow_count": 18,
+    "allow_count": 11,
+    "deny_count": 7,
+    "cross_zone_pairs": 6,
+    "zone_pairs_with_deny": 7
+  }
+}
