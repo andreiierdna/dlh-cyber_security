@@ -80,6 +80,10 @@ $audit = @(
     @{ Name = 'Logoff';                       Guid = '{0CCE9216-69AE-11D9-BED3-505054503030}'; Value = 1 }
     @{ Name = 'Special Logon';                Guid = '{0CCE921B-69AE-11D9-BED3-505054503030}'; Value = 1 }
     @{ Name = 'User Account Management';      Guid = '{0CCE9235-69AE-11D9-BED3-505054503030}'; Value = 3 }
+    # Not in the original task_5 list, added after 2x02's detection-proof testing showed
+    # adding a user to a privileged group (Event ID 4732) went completely unaudited -
+    # the single most direct signal of local privilege escalation.
+    @{ Name = 'Security Group Management';    Guid = '{0CCE9237-69AE-11D9-BED3-505054503030}'; Value = 3 }
     @{ Name = 'Sensitive Privilege Use';      Guid = '{0CCE9228-69AE-11D9-BED3-505054503030}'; Value = 3 }
     @{ Name = 'File System';                  Guid = '{0CCE921D-69AE-11D9-BED3-505054503030}'; Value = 3 }
     @{ Name = 'Registry';                     Guid = '{0CCE921E-69AE-11D9-BED3-505054503030}'; Value = 3 }

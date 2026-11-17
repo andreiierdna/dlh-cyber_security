@@ -1,0 +1,170 @@
+{
+  "timestamp": "2026-11-17T19:02:52+01:00",
+  "hostname": "billing-srv-01",
+  "up_interfaces": [
+    "enp0s3",
+    "enp0s8"
+  ],
+  "interfaces": [
+    {
+      "name": "lo",
+      "mac": "00:00:00:00:00:00",
+      "state": "UNKNOWN",
+      "addresses": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "name": "enp0s3",
+      "mac": "08:00:27:f2:02:af",
+      "state": "UP",
+      "addresses": [
+        "10.0.2.15/24",
+        "fe80::a00:27ff:fef2:2af/64"
+      ]
+    },
+    {
+      "name": "enp0s8",
+      "mac": "08:00:27:da:f2:f5",
+      "state": "UP",
+      "addresses": [
+        "10.10.1.10/24",
+        "10.10.3.1/24",
+        "fe80::a00:27ff:feda:f2f5/64"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "dst": "default",
+      "gateway": "10.0.2.2",
+      "dev": "enp0s3",
+      "prefsrc": "10.0.2.15",
+      "table": "main"
+    },
+    {
+      "dst": "10.0.2.0/24",
+      "gateway": null,
+      "dev": "enp0s3",
+      "prefsrc": "10.0.2.15",
+      "table": "main"
+    },
+    {
+      "dst": "10.0.2.2",
+      "gateway": null,
+      "dev": "enp0s3",
+      "prefsrc": "10.0.2.15",
+      "table": "main"
+    },
+    {
+      "dst": "10.0.2.3",
+      "gateway": null,
+      "dev": "enp0s3",
+      "prefsrc": "10.0.2.15",
+      "table": "main"
+    },
+    {
+      "dst": "10.10.1.0/24",
+      "gateway": null,
+      "dev": "enp0s8",
+      "prefsrc": "10.10.1.10",
+      "table": "main"
+    },
+    {
+      "dst": "10.10.3.0/24",
+      "gateway": null,
+      "dev": "enp0s8",
+      "prefsrc": "10.10.3.1",
+      "table": "main"
+    }
+  ],
+  "neighbors": [
+    {
+      "ip": "10.0.2.3",
+      "mac": "52:54:00:12:35:03",
+      "state": "STALE",
+      "dev": "enp0s3"
+    },
+    {
+      "ip": "10.0.2.2",
+      "mac": "52:54:00:12:35:02",
+      "state": "DELAY",
+      "dev": "enp0s3"
+    }
+  ],
+  "listening_sockets": [
+    {
+      "proto": "udp",
+      "bind_addr": "127.0.0.53%lo",
+      "port": 53,
+      "process": "systemd-resolve",
+      "pid": 759,
+      "peer": "0.0.0.0:*"
+    },
+    {
+      "proto": "udp",
+      "bind_addr": "10.0.2.15%enp0s3",
+      "port": 68,
+      "process": "systemd-network",
+      "pid": 743,
+      "peer": "0.0.0.0:*"
+    },
+    {
+      "proto": "tcp",
+      "bind_addr": "127.0.0.1",
+      "port": 33060,
+      "process": "mysqld",
+      "pid": 833,
+      "peer": "0.0.0.0:*"
+    },
+    {
+      "proto": "tcp",
+      "bind_addr": "0.0.0.0",
+      "port": 3306,
+      "process": "mysqld",
+      "pid": 833,
+      "peer": "0.0.0.0:*"
+    },
+    {
+      "proto": "tcp",
+      "bind_addr": "127.0.0.53%lo",
+      "port": 53,
+      "process": "systemd-resolve",
+      "pid": 759,
+      "peer": "0.0.0.0:*"
+    },
+    {
+      "proto": "tcp",
+      "bind_addr": "0.0.0.0",
+      "port": 22,
+      "process": "sshd",
+      "pid": 825,
+      "peer": "0.0.0.0:*"
+    },
+    {
+      "proto": "tcp",
+      "bind_addr": "[::]",
+      "port": 22,
+      "process": "sshd",
+      "pid": 825,
+      "peer": "[::]:*"
+    },
+    {
+      "proto": "tcp",
+      "bind_addr": "*",
+      "port": 80,
+      "process": "apache2",
+      "pid": 832,
+      "peer": "*:*"
+    }
+  ],
+  "listeners": 8,
+  "established_connections": null,
+  "dns_resolvers": {
+    "nameservers": [
+      "127.0.0.53"
+    ],
+    "resolvectl_status": "Global\n       Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported\nresolv.conf mode: stub\n\nLink 2 (enp0s3)\n    Current Scopes: DNS\n         Protocols: +DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported\nCurrent DNS Server: 10.0.2.3\n       DNS Servers: 10.0.2.3\n        DNS Domain: tail3ada16.ts.net\n\nLink 3 (enp0s8)\nCurrent Scopes: none\n     Protocols: -DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported\n"
+  },
+  "default_gateway": "10.0.2.2"
+}

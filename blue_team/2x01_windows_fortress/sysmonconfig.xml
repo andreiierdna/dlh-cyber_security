@@ -1199,12 +1199,12 @@
 	
   <!-- ===================== MedDefense custom rules ===================== -->
   <RuleGroup name="MedDefense" groupRelation="or">
-    <ProcessCreate onmatch="include">
-      <Image name="MedDefense-PsExec" condition="end with">\PsExec.exe;\PsExec64.exe;\PSEXESVC.exe</Image>
-      <Image name="MedDefense-Rclone" condition="end with">\rclone.exe</Image>
-      <CommandLine name="MedDefense-EncodedPowerShell" condition="contains any">-enc ;-EncodedCommand;-encodedcommand</CommandLine>
-      <ParentImage name="MedDefense-WmiProcessSpawn" condition="end with">\WmiPrvSE.exe</ParentImage>
-    </ProcessCreate>
+    <!-- No ProcessCreate include rule here: the baseline's ProcessCreate group is
+         onmatch="exclude" (log everything, minus noise). Any onmatch="include" group
+         for the same event type makes Sysmon log ONLY matches, globally, for that type -
+         it silently disabled all normal process-creation telemetry. PsExec, rclone and
+         encoded PowerShell command lines are not in the baseline's exclude list, so they
+         are still captured without a dedicated include rule here. -->
     <FileCreate onmatch="include">
       <TargetFilename name="MedDefense-DeploySelfTest" condition="begin with">C:\Windows\Temp\sysmon_test</TargetFilename>
     </FileCreate>

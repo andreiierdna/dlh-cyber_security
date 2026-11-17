@@ -36,18 +36,22 @@ $sysmonUrl = 'https://download.sysinternals.com/files/Sysmon.zip'
 $configUrl = 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-# Five MedDefense rules appended to the baseline: lateral movement (PsExec, WMI),
-# exfiltration (rclone), encoded PowerShell, and the deployment self-test.
+# One MedDefense rule appended to the baseline: the deployment self-test file marker.
+#
+# There is deliberately no ProcessCreate rule here. The baseline's own ProcessCreate
+# group is onmatch="exclude" (log everything, minus known noise). Sysmon combines rule
+# groups per event type: as soon as ANY group anywhere in the config sets
+# onmatch="include" for an event type, that type is logged ONLY when it matches an
+# include rule - globally, for every process on the box, not just within this group.
+# An earlier version of this script added a ProcessCreate include rule here to tag
+# PsExec, rclone, encoded PowerShell and WmiPrvSE child processes, which silently
+# disabled normal process-creation telemetry (Event ID 1) for everything else. None of
+# those patterns are in the baseline's exclude list, so they are still captured by the
+# exclude-only baseline group without a dedicated include rule.
 $customRules = @'
 
   <!-- ===================== MedDefense custom rules ===================== -->
   <RuleGroup name="MedDefense" groupRelation="or">
-    <ProcessCreate onmatch="include">
-      <Image name="MedDefense-PsExec" condition="end with">\PsExec.exe;\PsExec64.exe;\PSEXESVC.exe</Image>
-      <Image name="MedDefense-Rclone" condition="end with">\rclone.exe</Image>
-      <CommandLine name="MedDefense-EncodedPowerShell" condition="contains any">-enc ;-EncodedCommand;-encodedcommand</CommandLine>
-      <ParentImage name="MedDefense-WmiProcessSpawn" condition="end with">\WmiPrvSE.exe</ParentImage>
-    </ProcessCreate>
     <FileCreate onmatch="include">
       <TargetFilename name="MedDefense-DeploySelfTest" condition="begin with">C:\Windows\Temp\sysmon_test</TargetFilename>
     </FileCreate>

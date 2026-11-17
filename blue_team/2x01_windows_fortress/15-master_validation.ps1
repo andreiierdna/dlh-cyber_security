@@ -68,6 +68,7 @@ function Get-AuditSetting { param([string]$Sub) ($audit | Where-Object Subcatego
 $auditExpect = @(
     @('Credential Validation', 'Success and Failure'), @('Kerberos Authentication Service', 'Success and Failure'),
     @('Logon', 'Success and Failure'), @('Special Logon', 'Success'), @('User Account Management', 'Success and Failure'),
+    @('Security Group Management', 'Success and Failure'),
     @('Sensitive Privilege Use', 'Success and Failure'), @('Process Creation', 'Success')
 )
 foreach ($e in $auditExpect) {
@@ -104,8 +105,10 @@ if ($sysmon -and $sysmon.Status -eq 'Running') {
         if ($cfgPath -and (Test-Path $cfgPath)) {
             $names = [regex]::Matches((Get-Content -Path $cfgPath -Raw), 'name="(MedDefense-[^"]+)"') | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
             $custom = @($names).Count
-            if ($custom -ge 5) { Add-Check PASS "Custom rules: $custom present" }
-            else { Add-Check WARN "Custom rules: $custom present (expected 5)" $false }
+            # Only the FileCreate self-test marker is expected: a ProcessCreate include rule
+            # was removed because it silently disabled all other process-creation telemetry.
+            if ($custom -ge 1) { Add-Check PASS "Custom rules: $custom present" }
+            else { Add-Check WARN "Custom rules: $custom present (expected at least 1)" $false }
         } else {
             Add-Check WARN "Custom rules: config file not readable ($cfgPath)" $false
         }
