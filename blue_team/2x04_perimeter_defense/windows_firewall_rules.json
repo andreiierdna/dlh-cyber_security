@@ -1,0 +1,139 @@
+﻿{
+    "generated_at":  "2026-11-17T18:31:03Z",
+    "hostname":  "DC01",
+    "platform":  "windows",
+    "source":  "s.json",
+    "profiles":  [
+                     {
+                         "profile":  "Domain",
+                         "default_inbound_action":  "Block",
+                         "default_outbound_action":  "Allow",
+                         "log_blocked":  true,
+                         "log_file_name":  "%systemroot%\\system32\\LogFiles\\Firewall\\meddefense.log"
+                     },
+                     {
+                         "profile":  "Private",
+                         "default_inbound_action":  "Block",
+                         "default_outbound_action":  "Allow",
+                         "log_blocked":  true,
+                         "log_file_name":  "%systemroot%\\system32\\LogFiles\\Firewall\\meddefense.log"
+                     },
+                     {
+                         "profile":  "Public",
+                         "default_inbound_action":  "Block",
+                         "default_outbound_action":  "Allow",
+                         "log_blocked":  true,
+                         "log_file_name":  "%systemroot%\\system32\\LogFiles\\Firewall\\meddefense.log"
+                     }
+                 ],
+    "rules":  [
+                  {
+                      "display_name":  "MedDefense-MGMT-TCP-22",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "22"
+                                     ],
+                      "remote_address":  [
+                                             "172.16.30.0/255.255.255.0"
+                                         ]
+                  },
+                  {
+                      "display_name":  "MedDefense-INTERNAL-TCP-443",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "443"
+                                     ],
+                      "remote_address":  [
+                                             "10.10.0.0/255.255.0.0",
+                                             "172.16.20.0/255.255.255.0"
+                                         ]
+                  },
+                  {
+                      "display_name":  "MedDefense-INTERNAL-TCP-3306",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "3306"
+                                     ],
+                      "remote_address":  [
+                                             "10.10.0.0/255.255.0.0",
+                                             "172.16.20.0/255.255.255.0"
+                                         ]
+                  },
+                  {
+                      "display_name":  "MedDefense-DMZ-TCP-3306",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "3306"
+                                     ],
+                      "remote_address":  [
+                                             "172.16.10.0/255.255.255.0",
+                                             "10.10.5.0/255.255.255.0"
+                                         ]
+                  },
+                  {
+                      "display_name":  "MedDefense-MEDDEV-TCP-4242",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "4242"
+                                     ],
+                      "remote_address":  [
+                                             "10.10.4.0/255.255.255.0",
+                                             "172.16.40.0/255.255.255.0"
+                                         ]
+                  },
+                  {
+                      "display_name":  "MedDefense-MEDDEV-TCP-443",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "443"
+                                     ],
+                      "remote_address":  [
+                                             "10.10.4.0/255.255.255.0",
+                                             "172.16.40.0/255.255.255.0"
+                                         ]
+                  },
+                  {
+                      "display_name":  "MedDefense-MGMT-TCP-4242",
+                      "direction":  "Inbound",
+                      "action":  "Allow",
+                      "enabled":  "True",
+                      "profile":  "Any",
+                      "protocol":  "TCP",
+                      "local_port":  [
+                                         "4242"
+                                     ],
+                      "remote_address":  [
+                                             "172.16.30.0/255.255.255.0"
+                                         ]
+                  }
+              ],
+    "summary":  {
+                    "removed":  7,
+                    "created":  7,
+                    "flows_in_contract":  11
+                }
+}

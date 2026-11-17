@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-11-17T19:10:11+01:00",
+  "hostname": "billing-srv-01",
+  "rules_file": "meddefense.rules",
+  "rules_declared": 6,
+  "summary": {
+    "rules": 6,
+    "passed": 6,
+    "failed": 0,
+    "verdict": "PASS"
+  },
+  "validations": [
+    {
+      "sid": "9000001",
+      "name": "MEDDEV to Internet",
+      "pcap": "meddev_egress.pcap",
+      "hits": 24,
+      "status": "PASS"
+    },
+    {
+      "sid": "9000002",
+      "name": "Guest to SMB",
+      "pcap": "guest_smb.pcap",
+      "hits": 10,
+      "status": "PASS"
+    },
+    {
+      "sid": "9000003",
+      "name": "Large Outbound From Server",
+      "pcap": "large_outbound.pcap",
+      "hits": 1,
+      "status": "PASS"
+    },
+    {
+      "sid": "9000004",
+      "name": "DNS Tunneling Long Label",
+      "pcap": "dns_tunnel.pcap",
+      "hits": 17,
+      "status": "PASS"
+    },
+    {
+      "sid": "9000005",
+      "name": "Clinical to Unauthorized DB",
+      "pcap": "clinical_wrong_db.pcap",
+      "hits": 21,
+      "status": "PASS"
+    },
+    {
+      "sid": "9000006",
+      "name": "Telnet to MEDDEV",
+      "pcap": "telnet_meddev.pcap",
+      "hits": 14,
+      "status": "PASS"
+    }
+  ]
+}

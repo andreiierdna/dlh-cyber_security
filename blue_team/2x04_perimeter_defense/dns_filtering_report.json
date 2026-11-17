@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-11-17T19:10:15+01:00",
+  "hostname": "billing-srv-01",
+  "resolver": "dnsmasq 2.90 on 127.0.0.1",
+  "blocked_domains": 814,
+  "upstream_config": "/etc/dnsmasq.d/meddefense-upstream.conf",
+  "blocklist_config": "/etc/dnsmasq.d/meddefense-blocklist.conf",
+  "summary": {
+    "checks": 4,
+    "passed": 4,
+    "failed": 0,
+    "verdict": "PASS"
+  },
+  "checks": {
+    "query": "billing.meddefense.local",
+    "answer": "10.10.1.10",
+    "expected": "allow",
+    "status": "pass"
+  }
+}
