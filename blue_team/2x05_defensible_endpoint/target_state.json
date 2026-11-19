@@ -1,0 +1,355 @@
+{
+  "schema_version": "meddefense-capstone-target-v1",
+  "generated_at": "2026-11-18T22:22:15+00:00",
+  "site": "hawthorne",
+  "linux": {
+    "hardening_index": 80,
+    "host": "hawthorne-app-01"
+  },
+  "windows": {
+    "pass_rate": 85,
+    "host": "hawthorne-adm-01"
+  },
+  "controls": [
+    {
+      "id": "LNX-SSH-01",
+      "platform": "linux",
+      "family": "hardening",
+      "description": "SSH must refuse direct root login",
+      "check_type": "command_exit_zero",
+      "check_target": "sshd -T | grep -qx \"permitrootlogin no\"",
+      "expected_value": "no",
+      "source_project": "2x00",
+      "severity": "critical"
+    },
+    {
+      "id": "LNX-SSH-02",
+      "platform": "linux",
+      "family": "hardening",
+      "description": "SSH must refuse password authentication",
+      "check_type": "command_exit_zero",
+      "check_target": "sshd -T | grep -qx \"passwordauthentication no\"",
+      "expected_value": "no",
+      "source_project": "2x00",
+      "severity": "critical"
+    },
+    {
+      "id": "LNX-SYS-01",
+      "platform": "linux",
+      "family": "hardening",
+      "description": "Kernel must not forward packets",
+      "check_type": "command_exit_zero",
+      "check_target": "test \"$(sysctl -n net.ipv4.ip_forward)\" = 0",
+      "expected_value": "0",
+      "source_project": "2x00",
+      "severity": "high"
+    },
+    {
+      "id": "LNX-SYS-02",
+      "platform": "linux",
+      "family": "hardening",
+      "description": "ASLR must be fully enabled",
+      "check_type": "command_exit_zero",
+      "check_target": "test \"$(sysctl -n kernel.randomize_va_space)\" = 2",
+      "expected_value": "2",
+      "source_project": "2x00",
+      "severity": "high"
+    },
+    {
+      "id": "LNX-AUD-01",
+      "platform": "linux",
+      "family": "telemetry",
+      "description": "auditd must be active",
+      "check_type": "command_exit_zero",
+      "check_target": "systemctl is-active --quiet auditd",
+      "expected_value": "active",
+      "source_project": "2x02",
+      "severity": "critical"
+    },
+    {
+      "id": "LNX-APP-01",
+      "platform": "linux",
+      "family": "hardening",
+      "description": "AppArmor must be enabled with profiles in enforce mode",
+      "check_type": "command_exit_zero",
+      "check_target": "test $(aa-status --enforced 2>/dev/null | wc -l) -ge 1",
+      "expected_value": "enforced>=1",
+      "source_project": "2x00",
+      "severity": "high"
+    },
+    {
+      "id": "LNX-LYN-01",
+      "platform": "linux",
+      "family": "hardening",
+      "description": "Lynis hardening index must reach the target",
+      "check_type": "json_field_gte",
+      "check_target": "capstone/exec/linux_harden.json#lynis_after",
+      "expected_value": "80",
+      "source_project": "2x00",
+      "severity": "high"
+    },
+    {
+      "id": "WIN-FW-01",
+      "platform": "windows",
+      "family": "hardening",
+      "description": "Windows Firewall must default-deny inbound on every profile",
+      "check_type": "json_field_equals",
+      "check_target": "capstone/exec/windows_harden.json#firewall_default_deny",
+      "expected_value": "Block",
+      "source_project": "2x01",
+      "severity": "critical"
+    },
+    {
+      "id": "WIN-PS-01",
+      "platform": "windows",
+      "family": "telemetry",
+      "description": "PowerShell Script Block Logging must be enabled",
+      "check_type": "json_field_equals",
+      "check_target": "capstone/exec/windows_harden.json#sbl_enabled",
+      "expected_value": "1",
+      "source_project": "2x01",
+      "severity": "critical"
+    },
+    {
+      "id": "WIN-SYSMON-01",
+      "platform": "windows",
+      "family": "telemetry",
+      "description": "Sysmon must be installed and running",
+      "check_type": "json_field_equals",
+      "check_target": "capstone/exec/windows_harden.json#sysmon_running",
+      "expected_value": "Running",
+      "source_project": "2x01",
+      "severity": "critical"
+    },
+    {
+      "id": "WIN-AUD-01",
+      "platform": "windows",
+      "family": "telemetry",
+      "description": "Audit policy must cover Account Logon, Logon, Object Access and Privilege Use",
+      "check_type": "json_field_gte",
+      "check_target": "capstone/exec/windows_harden.json#audit_subcategories_covered",
+      "expected_value": "4",
+      "source_project": "2x01",
+      "severity": "high"
+    },
+    {
+      "id": "WIN-CIS-01",
+      "platform": "windows",
+      "family": "hardening",
+      "description": "CIS Level 1 pass rate must reach the target",
+      "check_type": "json_field_gte",
+      "check_target": "capstone/exec/windows_harden.json#pass_rate_after",
+      "expected_value": "85",
+      "source_project": "2x01",
+      "severity": "high"
+    },
+    {
+      "id": "TEL-LNX-01",
+      "platform": "linux",
+      "family": "telemetry",
+      "description": "Linux auditd rules file must be present and loaded",
+      "check_type": "command_exit_zero",
+      "check_target": "test -s /etc/audit/rules.d/meddefense.rules && auditctl -l | grep -q meddefense",
+      "expected_value": "-",
+      "source_project": "2x00",
+      "severity": "high"
+    },
+    {
+      "id": "TEL-LNX-02",
+      "platform": "linux",
+      "family": "telemetry",
+      "description": "Structured Linux telemetry export must exist",
+      "check_type": "file_exists",
+      "check_target": "capstone/telemetry/linux_events.json",
+      "expected_value": "exists",
+      "source_project": "2x02",
+      "severity": "high"
+    },
+    {
+      "id": "TEL-WIN-01",
+      "platform": "windows",
+      "family": "telemetry",
+      "description": "Sysmon must have produced events in the last 10 minutes",
+      "check_type": "json_field_gte",
+      "check_target": "capstone/telemetry/windows_coverage.json#export_events",
+      "expected_value": "1",
+      "source_project": "2x02",
+      "severity": "high"
+    },
+    {
+      "id": "TEL-WIN-02",
+      "platform": "windows",
+      "family": "telemetry",
+      "description": "Script Block Logging channel must contain events",
+      "check_type": "json_field_gte",
+      "check_target": "capstone/telemetry/windows_coverage.json#tests_passed",
+      "expected_value": "4",
+      "source_project": "2x02",
+      "severity": "high"
+    },
+    {
+      "id": "PAT-01",
+      "platform": "linux",
+      "family": "patching",
+      "description": "Vulnerability inventory artifact must exist",
+      "check_type": "file_exists",
+      "check_target": "capstone/patch/vulnerability_inventory.json",
+      "expected_value": "exists",
+      "source_project": "2x03",
+      "severity": "high"
+    },
+    {
+      "id": "PAT-02",
+      "platform": "linux",
+      "family": "patching",
+      "description": "Patch plan artifact must exist",
+      "check_type": "file_exists",
+      "check_target": "capstone/patch/patch_plan.json",
+      "expected_value": "exists",
+      "source_project": "2x03",
+      "severity": "high"
+    },
+    {
+      "id": "PAT-03",
+      "platform": "linux",
+      "family": "patching",
+      "description": "Patch execution log must contain zero failed entries",
+      "check_type": "json_field_equals",
+      "check_target": "capstone/patch/pipeline_summary.json#failed_entries",
+      "expected_value": "0",
+      "source_project": "2x03",
+      "severity": "critical"
+    },
+    {
+      "id": "PAT-04",
+      "platform": "linux",
+      "family": "patching",
+      "description": "unattended-upgrades must be configured with the mandated blacklist",
+      "check_type": "grep_match",
+      "check_target": "/etc/apt/apt.conf.d/51-meddefense-unattended-upgrades",
+      "expected_value": "Package-Blacklist",
+      "source_project": "2x03",
+      "severity": "medium"
+    },
+    {
+      "id": "NET-NFT-01",
+      "platform": "network",
+      "family": "network",
+      "description": "nftables input chain must default to drop",
+      "check_type": "grep_match",
+      "check_target": "capstone/network/nftables.conf",
+      "expected_value": "policy drop",
+      "source_project": "2x04",
+      "severity": "critical"
+    },
+    {
+      "id": "NET-SEG-01",
+      "platform": "linux",
+      "family": "network",
+      "description": "Capstone segmentation file must be present",
+      "check_type": "file_exists",
+      "check_target": "/home/analyst/MedDefense_Lab/capstone/segmentation_rules.json",
+      "expected_value": "exists",
+      "source_project": "2x04",
+      "severity": "high"
+    },
+    {
+      "id": "NET-SUR-01",
+      "platform": "linux",
+      "family": "network",
+      "description": "Custom Suricata ruleset must load at least six rules",
+      "check_type": "json_field_gte",
+      "check_target": "capstone/network/rule_validation.json#rules_declared",
+      "expected_value": "6",
+      "source_project": "2x04",
+      "severity": "high"
+    },
+    {
+      "id": "NET-SUR-02",
+      "platform": "linux",
+      "family": "network",
+      "description": "Every custom Suricata rule must fire against its target PCAP",
+      "check_type": "json_field_equals",
+      "check_target": "capstone/network/rule_validation.json#summary.failed",
+      "expected_value": "0",
+      "source_project": "2x04",
+      "severity": "critical"
+    },
+    {
+      "id": "NET-DNS-01",
+      "platform": "linux",
+      "family": "network",
+      "description": "Local DNS filter must be active",
+      "check_type": "command_exit_zero",
+      "check_target": "systemctl is-active --quiet dnsmasq",
+      "expected_value": "active",
+      "source_project": "2x04",
+      "severity": "high"
+    },
+    {
+      "id": "HND-01",
+      "platform": "both",
+      "family": "handoff",
+      "description": "compliance report must exist",
+      "check_type": "file_exists",
+      "check_target": "capstone/compliance.json",
+      "expected_value": "exists",
+      "source_project": "2x05",
+      "severity": "high"
+    },
+    {
+      "id": "HND-02",
+      "platform": "both",
+      "family": "handoff",
+      "description": "manifest with SHA-256 per file must exist",
+      "check_type": "file_exists",
+      "check_target": "capstone/manifest.json",
+      "expected_value": "exists",
+      "source_project": "2x05",
+      "severity": "high"
+    },
+    {
+      "id": "HND-03",
+      "platform": "both",
+      "family": "handoff",
+      "description": "telemetry package must be tarballed",
+      "check_type": "file_exists",
+      "check_target": "capstone/hawthorne_telemetry.tar.gz",
+      "expected_value": "exists",
+      "source_project": "2x05",
+      "severity": "high"
+    },
+    {
+      "id": "HND-04",
+      "platform": "both",
+      "family": "handoff",
+      "description": "runbook script must be present and executable",
+      "check_type": "command_exit_zero",
+      "check_target": "test -x capstone/runbook.sh",
+      "expected_value": "executable",
+      "source_project": "2x05",
+      "severity": "high"
+    }
+  ],
+  "summary": {
+    "controls": 29,
+    "by_platform": {
+      "both": 4,
+      "linux": 17,
+      "network": 1,
+      "windows": 7
+    },
+    "by_family": {
+      "handoff": 4,
+      "hardening": 8,
+      "network": 5,
+      "patching": 4,
+      "telemetry": 8
+    },
+    "by_severity": {
+      "critical": 9,
+      "high": 19,
+      "medium": 1
+    }
+  }
+}
