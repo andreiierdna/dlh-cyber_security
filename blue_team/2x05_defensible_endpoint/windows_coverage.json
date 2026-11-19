@@ -1,0 +1,12 @@
+﻿{
+    "source":  "sysmon + powershell + security",
+    "tests_total":  4,
+    "export_events":  4462,
+    "platform":  "windows",
+    "hostname":  "HAWTHORNE-ADM-0",
+    "tests_passed":  4,
+    "tests_failed":  0,
+    "generated_at":  "2026-11-18T22:07:03Z",
+    "export_path":  "C:\\MedDefense_Lab\\capstone\\telemetry\\windows_events.json",
+    "verdict":  "PASS"
+}
