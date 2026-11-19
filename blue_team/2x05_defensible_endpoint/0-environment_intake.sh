@@ -3,7 +3,7 @@
 # Name:    0-environment_intake.sh
 # Purpose: Capture the pre-hardening state of hawthorne-app-01 as structured
 #          data so every later task can be measured against it.
-# Author:  MedDefense blue team (Holberton 2x05 capstone - Task 0)
+# Author:  Andrei
 # =============================================================================
 # Output: capstone/intake/linux_intake.json
 # Exit: 0 success, 1 a required collector failed, 2 environment error.

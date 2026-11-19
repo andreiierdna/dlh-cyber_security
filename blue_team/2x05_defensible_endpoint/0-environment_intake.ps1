@@ -7,7 +7,7 @@
     top-level shape (timestamp/hostname/platform/telemetry/firewall).
     Exit: 0 success, 1 a collector failed, 2 environment error.
 .NOTES
-    Author: MedDefense blue team (Holberton 2x05 capstone - Task 0)
+    Author: Andrei
 #>
 [CmdletBinding()]
 param([string]$OutFile = 'C:\MedDefense_Lab\capstone\intake\windows_intake.json')
