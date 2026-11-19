@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-11-18T21:42:21+00:00",
+  "hostname": "hawthorne-app-01",
+  "platform": "linux",
+  "steps": [
+    {
+      "name": "ssh_hardening",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/site/4-ssh_hardening.sh",
+      "exit_code": 0,
+      "duration_seconds": 1,
+      "changed": true
+    },
+    {
+      "name": "sysctl_hardening",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/2x00/5-sysctl_hardening.sh",
+      "exit_code": 0,
+      "duration_seconds": 3,
+      "changed": false
+    },
+    {
+      "name": "filesystem_sweep",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/2x00/6-filesystem_hardening.sh",
+      "exit_code": 0,
+      "duration_seconds": 3,
+      "changed": true
+    },
+    {
+      "name": "service_minimization",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/site/7-service_minimization.sh",
+      "exit_code": 0,
+      "duration_seconds": 11,
+      "changed": true
+    },
+    {
+      "name": "pam_hardening",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/2x00/8-service_minimization.sh",
+      "exit_code": 0,
+      "duration_seconds": 0,
+      "changed": true
+    },
+    {
+      "name": "apparmor_enforcement",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/2x00/9-apparmor_config.sh",
+      "exit_code": 0,
+      "duration_seconds": 0,
+      "changed": true
+    },
+    {
+      "name": "auditd_deployment",
+      "script_path": "/home/analyst/MedDefense_Lab/capstone/prior/2x00/10-auditd_config.sh",
+      "exit_code": 0,
+      "duration_seconds": 4,
+      "changed": false
+    },
+    {
+      "name": "extras",
+      "script_path": "(inline)",
+      "exit_code": 0,
+      "duration_seconds": 17,
+      "changed": true
+    }
+  ],
+  "lynis_before": 59,
+  "lynis_after": 80,
+  "index_delta": 21,
+  "lynis_target": 80,
+  "target_met": true,
+  "controls_touched": [
+    "LNX-SSH-01",
+    "LNX-SSH-02",
+    "LNX-SYS-01",
+    "LNX-SYS-02",
+    "LNX-AUD-01",
+    "LNX-APP-01",
+    "LNX-LYN-01",
+    "TEL-LNX-01",
+    "TEL-LNX-02",
+    "PAT-01",
+    "PAT-02",
+    "PAT-03",
+    "PAT-04",
+    "NET-SEG-01",
+    "NET-SUR-01",
+    "NET-SUR-02",
+    "NET-DNS-01",
+    "HND-01",
+    "HND-02",
+    "HND-03",
+    "HND-04"
+  ],
+  "log_path": "capstone/exec/linux_harden.log"
+}
