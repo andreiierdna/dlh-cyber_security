@@ -1,0 +1,77 @@
+﻿{
+    "log_path":  "C:\\MedDefense_Lab\\capstone\\exec\\windows_harden.log",
+    "rate_delta":  66.6,
+    "sbl_enabled":  1,
+    "target_met":  true,
+    "audit_subcategories_covered":  4,
+    "pass_rate_before":  26.7,
+    "steps":  [
+                  {
+                      "name":  "account_policy",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  0,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "audit_policy",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  0,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "firewall",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  1,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "powershell_logging",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  2,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "legacy_protocols",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  0,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "sysmon",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  0,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "defender_asr",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  0,
+                      "changed":  true
+                  },
+                  {
+                      "name":  "execution_policy",
+                      "script_path":  "4-windows_harden.ps1",
+                      "exit_code":  0,
+                      "duration_seconds":  0,
+                      "changed":  true
+                  }
+              ],
+    "pass_rate_after":  93.3,
+    "fail_count":  0,
+    "na_count":  2,
+    "platform":  "windows",
+    "hostname":  "HAWTHORNE-ADM-0",
+    "target_rate":  85,
+    "pass_count":  28,
+    "firewall_default_deny":  "Block",
+    "controls_total":  30,
+    "sysmon_running":  "Running",
+    "timestamp":  "2026-11-18T22:00:10Z"
+}
