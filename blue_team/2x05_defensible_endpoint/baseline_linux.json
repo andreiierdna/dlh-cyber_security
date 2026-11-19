@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-11-18T21:20:26+00:00",
+  "hostname": "hawthorne-app-01",
+  "platform": "linux",
+  "lynis_version": "3.0.7",
+  "hardening_index": 59,
+  "warnings_count": 0,
+  "suggestions_count": 47,
+  "log_path": "capstone/baseline/lynis_baseline.log",
+  "lynis_exit_code": 0
+}

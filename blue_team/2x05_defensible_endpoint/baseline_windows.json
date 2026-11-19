@@ -1,0 +1,11 @@
+﻿{
+    "timestamp":  "2026-11-18T21:58:19Z",
+    "hostname":  "HAWTHORNE-ADM-0",
+    "platform":  "windows",
+    "controls_total":  30,
+    "pass_count":  8,
+    "fail_count":  16,
+    "na_count":  6,
+    "pass_rate_percent":  26.7,
+    "log_path":  "C:\\MedDefense_Lab\\capstone\\baseline\\windows_baseline.log"
+}
